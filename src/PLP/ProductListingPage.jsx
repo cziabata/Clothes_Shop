@@ -5,7 +5,7 @@ export class ProductListingPage extends React.Component {
     render() {
         return(
             <>
-                2
+                
             </>
         )
     }

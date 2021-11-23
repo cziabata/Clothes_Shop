@@ -6,7 +6,6 @@ import PDP from "./PDP/ProductDescriptionPage";
 function App() {
   return (
     <div className="App">
-        1q
         <ProductListingPage />
         <PDP />
     </div>
