@@ -1,13 +1,23 @@
 import React from "react";
-import "./App.css";
+import styles from "./App.module.scss";
 import { ProductListingPage } from "./PLP/ProductListingPage";
 import PDP from "./PDP/ProductDescriptionPage";
+import Header from "./Header/Header";
+
+const Content = () => {
+  return(
+    <main className={styles.content}>
+       <ProductListingPage />
+       <PDP />
+    </main>
+  )
+}
 
 function App() {
   return (
-    <div className="App">
-        <ProductListingPage />
-        <PDP />
+    <div className={styles.app}>
+       <Header />
+       <Content />
     </div>
   );
 }
