@@ -1,6 +1,31 @@
+@import "../SCSS/Variables.scss";
+
 .header {
     display: flex;
+    justify-content: space-between;
+    margin-top: 2vh;
 }
 .headerNavbar {
     display: flex;
+}
+.navbarItem a {
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+    transition: .2s;
+    &:hover {
+        color: $primary_color;
+        &::after {
+            content: "";
+            display: block;
+            margin-top: 3vh;
+            width: 100%;
+            background-color: $primary_color;
+            height: 2px;
+        }
+    }
+}
+.headerCartBar{
+    display: flex;
+    align-items: center;
 }
