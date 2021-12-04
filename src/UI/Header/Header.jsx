@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 import Logo from "./img/Main_Logo.png";
 import CartLogo from "./img/Empty_Cart.png";
-import Currency from "./img/Currency.png";
 
 class Header extends React.Component {
 
@@ -22,11 +21,14 @@ class Header extends React.Component {
                     </div>
                </div>
                <div>
-                   <img src={Logo} alt="Main Logo"/>
+                   <NavLink to="index.html"><img src={Logo} alt="Main Logo" className={styles.mainLogo}/></NavLink>
                </div>
                <div className={styles.headerCartBar}>
-                   <div><img src={CartLogo} alt="Cart Logo"/></div>
-                   <div><img src={Currency} alt="Currency Logo"/></div>
+                   <div><span className={styles.currency}>$</span></div>
+                   <div class={styles.cartWrapper}>
+                       <img src={CartLogo} alt="Cart Logo"/>
+                       <span className={styles.cartBadge}>1</span>
+                   </div>
                </div>
             </header>
         )
