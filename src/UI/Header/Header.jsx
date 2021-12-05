@@ -8,6 +8,7 @@ class Header extends React.Component {
 
     render() {
         return(
+            <>
             <header className={styles.header}>
                <div className={styles.headerNavbar}>
                     <div className={styles.navbarItem}>
@@ -24,13 +25,16 @@ class Header extends React.Component {
                    <NavLink to="index.html"><img src={Logo} alt="Main Logo" className={styles.mainLogo}/></NavLink>
                </div>
                <div className={styles.headerCartBar}>
-                   <div><span className={styles.currency}>$</span></div>
+                   <div>
+                       <span className={styles.currency}>$</span>
+                   </div>
                    <div class={styles.cartWrapper}>
                        <img src={CartLogo} alt="Cart Logo"/>
                        <span className={styles.cartBadge}>1</span>
                    </div>
                </div>
             </header>
+            </>
         )
     }
 }
