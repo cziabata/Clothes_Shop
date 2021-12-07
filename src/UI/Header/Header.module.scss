@@ -39,9 +39,11 @@
 .currency {
     font-size: 20px;
     font-weight: 500;
+    cursor: pointer;
 }
 .cartWrapper {
     position: relative;
+    cursor: pointer;
 }
 .cartBadge {
     position: absolute;
