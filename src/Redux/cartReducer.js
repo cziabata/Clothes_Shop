@@ -22,3 +22,6 @@ export let cartReducer = (state=initialState, ation) => {
             return state
     }
 }
+
+export const activateCart = () => ({type:ACTIVATE_CART});
+export const deactivateCart = () => ({type:DEACTIVATE_CART});

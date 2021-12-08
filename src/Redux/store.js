@@ -3,4 +3,4 @@ import { cartReducer } from "./cartReducer";
 
 let rootReducer = combineReducers({cartReducer});
 
-export let store = createStore(rootReducer)
+export let store = createStore(rootReducer);

@@ -1,23 +1,33 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { activateCart, deactivateCart } from "../../Redux/cartReducer";
 import styles from "./Header.module.scss";
 import Logo from "./img/Main_Logo.png";
 import CartLogo from "./img/Empty_Cart.png";
+var classNames = require('classnames');
+
+class Modal extends React.Component {
+    render() {
+        var cartCtyles = classNames({styles.modal}, )
+        return(
+            <div className={styles.modal}>
+                <div className={styles.modalContent}>
+                    1
+                </div>
+            </div>
+        )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        isActiveCart: state.cartReducer.isActiveCart
+    }
+}
+const Cart = connect(mapStateToProps)(Modal)
 
 class Header extends React.Component {
-    state = {
-        editeMode: false
-    }
-    activateEditeMode() {
-        this.setState({
-            editeMode: true
-        })
-    }
-    deactivateEditeMode() {
-        this.setState({
-            editeMode: false
-        })
-    }
     render() {
         return(
             <>
@@ -40,14 +50,15 @@ class Header extends React.Component {
                    <div>
                        <span className={styles.currency}>$</span>
                    </div>
-                   <div className={styles.cartWrapper} onClick={this.activateEditeMode.bind(this)}>
+                   <div className={styles.cartWrapper} onClick={this.props.activateCart}>
                        <img src={CartLogo} alt="Cart Logo"/>
                        <span className={styles.cartBadge}>1</span>
                    </div>
                </div>
             </header>
+            <Cart />
             </>
         )
     }
 }
-export default Header;
+export default connect(mapStateToProps, {activateCart, deactivateCart})(Header);
