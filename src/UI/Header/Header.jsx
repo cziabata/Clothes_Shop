@@ -5,13 +5,13 @@ import { activateCart, deactivateCart } from "../../Redux/cartReducer";
 import styles from "./Header.module.scss";
 import Logo from "./img/Main_Logo.png";
 import CartLogo from "./img/Empty_Cart.png";
-var classNames = require('classnames');
+import cn from "classnames";
 
 class Modal extends React.Component {
     render() {
-        var cartCtyles = classNames({styles.modal}, )
         return(
-            <div className={styles.modal}>
+            
+            <div className={cn(styles.modal, {[styles.active]: this.props.isActiveCart})}>
                 <div className={styles.modalContent}>
                     1
                 </div>
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
         isActiveCart: state.cartReducer.isActiveCart
     }
 }
-const Cart = connect(mapStateToProps)(Modal)
+const Cart = connect(mapStateToProps, null)(Modal)
 
 class Header extends React.Component {
     render() {
@@ -55,8 +55,8 @@ class Header extends React.Component {
                        <span className={styles.cartBadge}>1</span>
                    </div>
                </div>
+               <Cart />
             </header>
-            <Cart />
             </>
         )
     }
