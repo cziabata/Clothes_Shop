@@ -7,25 +7,26 @@ import Logo from "./img/Main_Logo.png";
 import CartLogo from "./img/Empty_Cart.png";
 import cn from "classnames";
 
-class Modal extends React.Component {
+class ModalCart extends React.Component {
     render() {
         return(
             
-            <div className={cn(styles.modal, {[styles.active]: this.props.isActiveCart})}>
-                <div className={styles.modalContent}>
+            <div className={cn(styles.modal, {[styles.active]: this.props.isActiveCart})} 
+                 onClick={this.props.deactivateCart}
+            >
+                <div className={styles.modalContent} onClick={e=>e.stopPropagation()}>
                     1
                 </div>
             </div>
         )
     }
 }
-
 const mapStateToProps = (state) => {
     return {
         isActiveCart: state.cartReducer.isActiveCart
     }
 }
-const Cart = connect(mapStateToProps, null)(Modal)
+const Cart = connect(mapStateToProps, {deactivateCart})(ModalCart)
 
 class Header extends React.Component {
     render() {
@@ -61,4 +62,4 @@ class Header extends React.Component {
         )
     }
 }
-export default connect(mapStateToProps, {activateCart, deactivateCart})(Header);
+export default connect(mapStateToProps, {activateCart})(Header);
