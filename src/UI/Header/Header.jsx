@@ -35,13 +35,13 @@ class Header extends React.Component {
             <header className={styles.header}>
                <div className={styles.headerNavbar}>
                     <div className={styles.navbarItem}>
-                        <NavLink to="woman">WOMAN</NavLink>
+                        <NavLink to="woman">ALL</NavLink>
                     </div>
                     <div className={styles.navbarItem}>
-                        <NavLink to="men">MEN</NavLink>
+                        <NavLink to="men">TECH</NavLink>
                     </div>
                     <div className={styles.navbarItem}>
-                        <NavLink to="kids">KIDS</NavLink>
+                        <NavLink to="kids">CLOTHES</NavLink>
                     </div>
                </div>
                <div>
