@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { activateCart, deactivateCart } from "../../Redux/cartReducer";
+import { activateCurrency, deactivateCurrency } from "../../Redux/currencyReducer";
 import styles from "./Header.module.scss";
 import Logo from "./img/Main_Logo.png";
 import CartLogo from "./img/Empty_Cart.png";
@@ -28,7 +29,30 @@ const mapStateToProps = (state) => {
 }
 const Cart = connect(mapStateToProps, {deactivateCart})(ModalCart)
 
+class CurrencyBar extends React.Component {
+    render() {
+        return(
+            <>
+                <div className={cn(styles.currency_wrapper, {[styles.active]: this.props.isActiveCurrency})} 
+                 onClick={this.props.deactivateCurrency}
+                >
+                     <div className={styles.currency_content} onClick={e=>e.stopPropagation()}>
+                        2
+                     </div>
+                </div>
+            </>
+        )
+    }
+}
+const mapStateToProps1 = (state) => {
+    return {
+        isActiveCurrency: state.currencyReducer.isActiveCurrency
+    }
+}
+const Currency = connect(mapStateToProps1, {deactivateCurrency})(CurrencyBar)
+
 class Header extends React.Component {
+    debugger
     render() {
         return(
             <>
@@ -48,7 +72,7 @@ class Header extends React.Component {
                    <NavLink to="index.html"><img src={Logo} alt="Main Logo" className={styles.mainLogo}/></NavLink>
                </div>
                <div className={styles.headerCartBar}>
-                   <div>
+                   <div onClick={this.props.activateCurrency}>
                        <span className={styles.currency}>$</span>
                    </div>
                    <div className={styles.cartWrapper} onClick={this.props.activateCart}>
@@ -56,10 +80,12 @@ class Header extends React.Component {
                        <span className={styles.cartBadge}>1</span>
                    </div>
                </div>
+               <Currency />
                <Cart />
+               
             </header>
             </>
         )
     }
 }
-export default connect(mapStateToProps, {activateCart})(Header);
+export default connect(mapStateToProps, {activateCart, activateCurrency})(Header);

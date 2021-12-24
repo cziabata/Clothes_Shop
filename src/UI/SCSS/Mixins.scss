@@ -1,0 +1,12 @@
+@mixin modal_overlay($color) {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: $color;
+    top: 7vh;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 1;
+    pointer-events: none;
+}
