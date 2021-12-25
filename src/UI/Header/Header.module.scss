@@ -75,12 +75,23 @@
     margin-right: 8vw;
 }
 //use mixin (with the same styles) for overlay on cart component and currency component
-.currency_wrapper {
-    @include modal_overlay(red)
+.currencyWrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: red;
+    top: 7vh;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    pointer-events: none;
 }
-.currency_content {
-    max-width: 114px;
-    max-height: 169px;
+.currencyContent {
+    width: 114px;
+    height: 169px;
+    margin-right: 7vw;
+    background: white;
     -webkit-box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.28); 
     box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.28);
 }
