@@ -31,7 +31,7 @@ class Header extends React.Component {
                </div>
                <div className={styles.headerCartBar}>
                    <div>
-                       <span className={styles.currency} onClick={this.props.activateCurrency}>$</span>
+                       <span className={styles.currency} onClick={this.props.activateCurrency}>{this.props.currentCurrency}</span>
                    </div>
                    <div className={styles.cartWrapper} onClick={this.props.activateCart}>
                        <img src={CartLogo} alt="Cart Logo"/>
@@ -46,4 +46,9 @@ class Header extends React.Component {
         )
     }
 }
-export default connect(null, {activateCart, activateCurrency})(Header);
+let mapStateToProps = (state) => {
+    return {
+        currentCurrency: state.currencyReducer.currentCurrency,
+    }
+}
+export default connect(mapStateToProps, {activateCart, activateCurrency})(Header);

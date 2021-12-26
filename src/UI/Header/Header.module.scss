@@ -38,9 +38,22 @@
     align-items: flex-start;
 }
 .currency {
+    position: relative;
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -1vw;
+        font-size:3px;
+        padding: 3px;
+        display: inline-block;
+        border-right: 1px solid black;
+        border-top: 1px solid black;
+        transform: rotate(315deg);
+    }
 }
 .cartWrapper {
     position: relative;
@@ -61,7 +74,7 @@
 
 //use mixin (with the same styles) for overlay on cart component and currency component
 .modal {
-    @include modal_overlay(rgba(0, 0, 0, 0.2))
+    @include modal_overlay(rgba(0, 0, 0, 0.1))
 }
 .active {
     opacity: 1;
@@ -74,24 +87,23 @@
     background: white;
     margin-right: 8vw;
 }
-//use mixin (with the same styles) for overlay on cart component and currency component
-.currencyWrapper {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background: red;
-    top: 7vh;
-    left: 0;
-    display: flex;
-    justify-content: flex-end;
-    opacity: 0;
-    pointer-events: none;
-}
 .currencyContent {
     width: 114px;
     height: 169px;
     margin-right: 7vw;
+    padding-left: 20px;
     background: white;
     -webkit-box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.28); 
     box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.28);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28.8px;
+    & div {
+        padding-top: 20px;
+        cursor: pointer;
+        &:hover {
+            color: $primary_color;
+            transition: .2s;
+        }
+    }
 }
