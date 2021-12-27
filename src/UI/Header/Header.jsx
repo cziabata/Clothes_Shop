@@ -8,6 +8,7 @@ import Logo from "./img/Main_Logo.png";
 import CartLogo from "./img/Empty_Cart.png";
 import { Currency } from "./Currency";
 import { Cart } from "./Cart";
+import cn from "classnames";
 
 class Header extends React.Component {
     debugger
@@ -31,7 +32,10 @@ class Header extends React.Component {
                </div>
                <div className={styles.headerCartBar}>
                    <div>
-                       <span className={styles.currency} onClick={this.props.activateCurrency}>{this.props.currentCurrency}</span>
+                       <span className={cn(styles.currency, {[styles.activeCurrency]: this.props.isActiveCurrency})} 
+                             onClick={this.props.activateCurrency}>
+                                 {this.props.currentCurrency}
+                       </span>
                    </div>
                    <div className={styles.cartWrapper} onClick={this.props.activateCart}>
                        <img src={CartLogo} alt="Cart Logo"/>
@@ -49,6 +53,7 @@ class Header extends React.Component {
 let mapStateToProps = (state) => {
     return {
         currentCurrency: state.currencyReducer.currentCurrency,
+        isActiveCurrency: state.currencyReducer.isActiveCurrency,
     }
 }
 export default connect(mapStateToProps, {activateCart, activateCurrency})(Header);

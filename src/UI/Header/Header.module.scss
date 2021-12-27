@@ -45,13 +45,19 @@
     &::after {
         content: "";
         position: absolute;
-        top: 50%;
+        top: 37.5%;
         right: -1vw;
         font-size:3px;
         padding: 3px;
         display: inline-block;
         border-right: 1px solid black;
         border-top: 1px solid black;
+        transform: rotate(135deg);
+    }
+}
+.activeCurrency {
+    &::after {
+        top: 50%;
         transform: rotate(315deg);
     }
 }
