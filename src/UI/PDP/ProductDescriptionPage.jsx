@@ -13,7 +13,7 @@ class ProductDescriptionPage extends React.Component {
             return(
             <div>
                 <div>{data.categories[0].name}</div>
-                <div>{data.categories[0].products[1].gallery.map(src=><img src={src} alt="item" />)}</div>
+                <div>{data.categories[1].products[1].gallery.map(src=><img src={src} alt="item" />)}</div>
                 <div>
                     <span dangerouslySetInnerHTML={{__html:data.categories[0].products[1].description}} />
                 </div>
@@ -26,7 +26,6 @@ class ProductDescriptionPage extends React.Component {
     render() {
         return(
             <>
-                1
                {this.getData()} 
             </>
         )
