@@ -1,18 +1,18 @@
 import React from "react";
 import { graphql } from '@apollo/client/react/hoc';
-import {gql} from "@apollo/client";
 import { compose } from "redux";
+import { Data, Data2 } from "../../Data_Access_Layer/Data_Access_Layer";
 
 class ProductDescriptionPage extends React.Component {
     getData(){
-        var data = this.props.data;
+        let data = this.props.data;
         let data2 = this.props.data2;
         if(data.loading || data2.loading){
             return(<div>Loading...</div>)
         } else {
             return(
             <div>
-                <div>{data.categories[0].name}</div>
+                <div>{data.categories[0].name.toUpperCase()}</div>
                 <div>{data.categories[1].products[1].gallery.map(src=><img src={src} alt="item" />)}</div>
                 <div>
                     <span dangerouslySetInnerHTML={{__html:data.categories[0].products[1].description}} />
@@ -31,16 +31,6 @@ class ProductDescriptionPage extends React.Component {
         )
     }
 }
-const Data = gql`
-query{
-  categories{name, products{description, brand, inStock, gallery ,category,prices{currency, amount}, attributes{items{displayValue}}}}
-}
-`
-const Data2 = gql`
-query{
-    category{products {name}}
-  }
-`
 export default  compose(
     graphql(Data),
     graphql(Data2, {name: "data2"})
