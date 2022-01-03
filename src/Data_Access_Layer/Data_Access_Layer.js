@@ -2,7 +2,7 @@ import {gql} from "@apollo/client";
 
 export const Data = gql`
 query{
-  categories{name, products{description, brand, inStock, gallery ,category,prices{currency, amount}, attributes{items{displayValue}}}}
+  categories{products{description, brand, inStock, gallery ,category,prices{currency, amount}, attributes{items{displayValue}}}}
 }
 `
 export const GetCategories = gql`
