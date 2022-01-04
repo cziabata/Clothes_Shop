@@ -1,7 +1,9 @@
 import React from "react";
 import { graphql } from '@apollo/client/react/hoc';
 import { compose } from "redux";
-import { Data } from "../../../Data_Access_Layer/Data_Access_Layer";
+import { connect } from "react-redux";
+import { AllData } from "../../../Data_Access_Layer/Data_Access_Layer";
+import styles from "../ProductListingPage.module.scss";
 import ProductDescriptionPage from "../../PDP/ProductDescriptionPage";
 
 class All extends React.Component {
@@ -14,9 +16,23 @@ class All extends React.Component {
             return(
             <div>
                 <h1>ALL</h1>
-                <div>{data.categories[1].products[1].gallery.map(src=><img src={src} alt="item" />)}</div>
+                <div className={styles.productsContainer}>
+                    {data.category.products.map(product =>
+                        <div>
+                            <div className={styles.productImage}>
+                                <img src={product.gallery[0]} alt="product_item"/>
+                            </div>
+                            <div>
+                                <span>{product.name}</span>
+                            </div>
+                            <div>
+                                <span>{product.prices[0].amount}</span>
+                            </div>
+                        </div>
+                    )}
+                </div>
                 <div>
-                    <span dangerouslySetInnerHTML={{__html:data.categories[0].products[1].description}} />
+                    <span dangerouslySetInnerHTML={{__html:data.category.products[1].description}} />
                 </div>
             </div>)
         }
@@ -29,4 +45,9 @@ class All extends React.Component {
         )
     }
 }
-export default compose(graphql(Data))(All)
+const mapStateToProps = (state) => {
+    return {
+        currentCurrency: state.currencyReducer.currentCurrency,
+    }
+}
+export default compose(graphql(AllData), connect(mapStateToProps, null))(All)

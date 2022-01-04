@@ -1,3 +1,9 @@
-.wrapper {
-    position: relative;
+.productImage img {
+    max-width: 356px;
+    max-height: 338px;
+}
+.productsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 1 33.333%;
 }

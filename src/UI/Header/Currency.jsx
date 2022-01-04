@@ -2,10 +2,9 @@ import React from "react";
 import cn from "classnames";
 import styles from "./Header.module.scss";
 import { connect } from "react-redux";
-import { deactivateCurrency, setUSD, setEUR, setJPY } from "../../Redux/currencyReducer";
+import { deactivateCurrency, setUSD, setGBP, setJPY, setAUD, setRUB } from "../../Redux/currencyReducer";
 
 class CurrencyBar extends React.Component {
-    debugger
     render() {
         return(
             <>
@@ -14,8 +13,10 @@ class CurrencyBar extends React.Component {
                 >
                      <div className={styles.currencyContent} onClick={e=>e.stopPropagation()}>
                         <div onClick={this.props.setUSD}>$ USD</div>
-                        <div onClick={this.props.setEUR}>€ EUR</div>
+                        <div onClick={this.props.setGBP}>£ GBP</div>
                         <div onClick={this.props.setJPY}>¥ JPY</div>
+                        <div onClick={this.props.setAUD}>$ AUD</div>
+                        <div onClick={this.props.setRUB}>₽ RUB</div>
                      </div>
                 </div>
             </>
@@ -30,6 +31,8 @@ const mapStateToProps = (state) => {
 export const Currency = connect(mapStateToProps, {
     deactivateCurrency,
     setUSD,
-    setEUR,
+    setGBP,
     setJPY,
+    setRUB,
+    setAUD,
 })(CurrencyBar)
