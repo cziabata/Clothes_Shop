@@ -1,3 +1,7 @@
+.productImage {
+    display: flex;
+    justify-content: center;
+}
 .productImage img {
     max-width: 356px;
     max-height: 338px;
@@ -5,5 +9,26 @@
 .productsContainer {
     display: flex;
     flex-wrap: wrap;
-    flex: 0 1 33.333%;
+}
+.productWrapper {
+    flex: 0 1 30%;
+    border: 16px solid transparent;
+    position: relative;
+    &:hover {
+        -webkit-box-shadow: 3px 3px 12px 3px rgba(34, 60, 80, 0.11);
+        -moz-box-shadow: 3px 3px 12px 3px rgba(34, 60, 80, 0.11);
+        box-shadow: 3px 3px 12px 3px rgba(34, 60, 80, 0.11);
+        
+    }
+
+}
+.productName {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 28px;
+}
+.productPrice {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
 }

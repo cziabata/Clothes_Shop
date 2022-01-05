@@ -18,15 +18,15 @@ class All extends React.Component {
                 <h1>ALL</h1>
                 <div className={styles.productsContainer}>
                     {data.category.products.map(product =>
-                        <div>
+                        <div className={styles.productWrapper}>
                             <div className={styles.productImage}>
-                                <img src={product.gallery[0]} alt="product_item"/>
+                                <div><img src={product.gallery[0]} alt="product_item"/></div>
                             </div>
                             <div>
-                                <span>{product.name}</span>
+                                <span className={styles.productName}>{product.name}</span>
                             </div>
                             <div>
-                                <span>{product.prices[0].amount}</span>
+                                <span className={styles.productPrice}>{product.prices[0].amount}</span>
                             </div>
                         </div>
                     )}
