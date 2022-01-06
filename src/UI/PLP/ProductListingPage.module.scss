@@ -1,3 +1,5 @@
+@import "../SCSS/Variables.scss";
+
 .productImage {
     display: flex;
     justify-content: center;
@@ -18,9 +20,11 @@
         -webkit-box-shadow: 3px 3px 12px 3px rgba(34, 60, 80, 0.11);
         -moz-box-shadow: 3px 3px 12px 3px rgba(34, 60, 80, 0.11);
         box-shadow: 3px 3px 12px 3px rgba(34, 60, 80, 0.11);
-        
     }
-
+}
+.productWrapper:hover .productCartWrap {
+    opacity: 1;
+    pointer-events: all;
 }
 .productName {
     font-weight: 300;
@@ -31,4 +35,22 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 28px;
+}
+.productCart {
+    padding: 10px;
+    
+}
+.productCartWrap {
+    position: absolute;
+    right: 15px;
+    bottom: 45px;
+    opacity: 0;
+    pointer-events: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 49%;
+    background-color: $primary_color;
+    &:hover {
+        cursor: pointer;
+    }
 }

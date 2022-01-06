@@ -3,6 +3,7 @@ import { graphql } from '@apollo/client/react/hoc';
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { AllData } from "../../../Data_Access_Layer/Data_Access_Layer";
+import EmptyCart from "../../Images/Empty Cart.svg";
 import styles from "../ProductListingPage.module.scss";
 import ProductDescriptionPage from "../../PDP/ProductDescriptionPage";
 
@@ -20,7 +21,9 @@ class All extends React.Component {
                     {data.category.products.map(product =>
                         <div className={styles.productWrapper}>
                             <div className={styles.productImage}>
-                                <div><img src={product.gallery[0]} alt="product_item"/></div>
+                                <div>
+                                    <img src={product.gallery[0]} alt="product_item"/>
+                                </div>
                             </div>
                             <div>
                                 <span className={styles.productName}>{product.name}</span>
@@ -28,6 +31,7 @@ class All extends React.Component {
                             <div>
                                 <span className={styles.productPrice}>{product.prices[0].amount}</span>
                             </div>
+                            <div className={styles.productCartWrap}><img src={EmptyCart} alt="cart_item" className={styles.productCart}/></div>
                         </div>
                     )}
                 </div>
