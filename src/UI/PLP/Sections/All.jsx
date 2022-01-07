@@ -19,7 +19,7 @@ class All extends React.Component {
                 <h1>ALL</h1>
                 <div className={styles.productsContainer}>
                     {data.category.products.map(product =>
-                        <div className={styles.productWrapper}>
+                        <div className={styles.productWrapper} id={product.id}>
                             <div className={styles.productImage}>
                                 <div>
                                     <img src={product.gallery[0]} alt="product_item"/>
@@ -29,7 +29,11 @@ class All extends React.Component {
                                 <span className={styles.productName}>{product.name}</span>
                             </div>
                             <div>
-                                <span className={styles.productPrice}>{product.prices[0].amount}</span>
+                                <span className={styles.productPrice}>{product.prices.map(
+                                    price=>{if(price.currency===this.props.currencyName){
+                                        return <span id={price.currency}>{price.currency + price.amount}</span>
+                                    }else{return ""}}
+                                )}</span>
                             </div>
                             <div className={styles.productCartWrap}><img src={EmptyCart} alt="cart_item" className={styles.productCart}/></div>
                         </div>
@@ -52,6 +56,7 @@ class All extends React.Component {
 const mapStateToProps = (state) => {
     return {
         currentCurrency: state.currencyReducer.currentCurrency,
+        currencyName: state.currencyReducer.name,
     }
 }
 export default compose(graphql(AllData), connect(mapStateToProps, null))(All)

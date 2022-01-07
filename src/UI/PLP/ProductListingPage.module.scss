@@ -14,8 +14,9 @@
 }
 .productWrapper {
     flex: 0 1 30%;
-    border: 16px solid transparent;
     position: relative;
+    margin: 5px;
+    padding: 10px;
     &:hover {
         -webkit-box-shadow: 3px 3px 12px 3px rgba(34, 60, 80, 0.11);
         -moz-box-shadow: 3px 3px 12px 3px rgba(34, 60, 80, 0.11);

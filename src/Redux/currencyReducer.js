@@ -9,6 +9,7 @@ const SET_RUB = "currencyReducer/SET_RUB";
 let initialState = {
     isActiveCurrency: false,
     currentCurrency: "$",
+    name: "USD"
 }
 export let currencyReducer = (state=initialState, action) => {
     switch(action.type) {

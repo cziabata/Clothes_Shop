@@ -6,8 +6,7 @@ import { Data, Data2 } from "../../Data_Access_Layer/Data_Access_Layer";
 class ProductDescriptionPage extends React.Component {
     getData(){
         let data = this.props.data;
-        let data2 = this.props.data2;
-        if(data.loading || data2.loading){
+        if(data.loading){
             return(<div>Loading...</div>)
         } else {
             return(
@@ -16,9 +15,6 @@ class ProductDescriptionPage extends React.Component {
                 <div>{data.categories[1].products[1].gallery.map(src=><img src={src} alt="item" />)}</div>
                 <div>
                     <span dangerouslySetInnerHTML={{__html:data.categories[0].products[1].description}} />
-                </div>
-                <div>
-                    {data2.category.products.map(products=><div>{products.name}</div>)}
                 </div>
             </div>)
         }
@@ -33,5 +29,5 @@ class ProductDescriptionPage extends React.Component {
 }
 export default  compose(
     graphql(Data),
-    graphql(Data2, {name: "data2"})
+    /*graphql(Data2, {name: "data2"})*/
 )(ProductDescriptionPage);
