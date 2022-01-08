@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from '@apollo/client/react/hoc';
 import { compose } from "redux";
-import { Data, Data2 } from "../../Data_Access_Layer/Data_Access_Layer";
+import { Data} from "../../Data_Access_Layer/Data_Access_Layer";
 
 class ProductDescriptionPage extends React.Component {
     getData(){

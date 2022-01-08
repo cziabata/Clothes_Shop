@@ -3,9 +3,9 @@ import { graphql } from '@apollo/client/react/hoc';
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { AllData } from "../../../Data_Access_Layer/Data_Access_Layer";
+import { setProduct } from "../../../Redux/productDescriptionReducer";
 import EmptyCart from "../../Images/Empty Cart.svg";
 import styles from "../ProductListingPage.module.scss";
-import ProductDescriptionPage from "../../PDP/ProductDescriptionPage";
 
 class All extends React.Component {
     getData(){
@@ -13,13 +13,12 @@ class All extends React.Component {
         if(data.loading){
             return(<div>Loading...</div>)
         } else {
-            
             return(
             <div>
                 <h1>ALL</h1>
                 <div className={styles.productsContainer}>
                     {data.category.products.map(product =>
-                        <div className={styles.productWrapper} id={product.id}>
+                        <div className={styles.productWrapper} id={product.id} onClick={()=>{this.props.setProduct(product)}}>
                             <div className={styles.productImage}>
                                 <div>
                                     <img src={product.gallery[0]} alt="product_item"/>
@@ -31,8 +30,8 @@ class All extends React.Component {
                             <div>
                                 <span className={styles.productPrice}>{product.prices.map(
                                     price=>{if(price.currency===this.props.currencyName){
-                                        return <span id={price.currency}>{price.currency + price.amount}</span>
-                                    }else{return ""}}
+                                        return <span id={price.currency}>{this.props.currentCurrency + price.amount}</span>
+                                    } else{return ""}}
                                 )}</span>
                             </div>
                             <div className={styles.productCartWrap}><img src={EmptyCart} alt="cart_item" className={styles.productCart}/></div>
@@ -59,4 +58,4 @@ const mapStateToProps = (state) => {
         currencyName: state.currencyReducer.name,
     }
 }
-export default compose(graphql(AllData), connect(mapStateToProps, null))(All)
+export default compose(graphql(AllData), connect(mapStateToProps, {setProduct}))(All)
