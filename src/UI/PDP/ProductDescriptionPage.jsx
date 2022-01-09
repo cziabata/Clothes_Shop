@@ -1,33 +1,42 @@
 import React from "react";
-import { graphql } from '@apollo/client/react/hoc';
-import { compose } from "redux";
-import { Data} from "../../Data_Access_Layer/Data_Access_Layer";
+import { connect } from "react-redux";
+import { setImage } from "../../Redux/productDescriptionReducer";
+import styles from "./ProductDescriptionPage.module.scss";
 
 class ProductDescriptionPage extends React.Component {
-    getData(){
-        let data = this.props.data;
-        if(data.loading){
-            return(<div>Loading...</div>)
-        } else {
-            return(
-            <div>
-                <div>{data.categories[0].name.toUpperCase()}</div>
-                <div>{data.categories[1].products[1].gallery.map(src=><img src={src} alt="item" />)}</div>
-                <div>
-                    <span dangerouslySetInnerHTML={{__html:data.categories[0].products[1].description}} />
-                </div>
-            </div>)
-        }
-    }
     render() {
+        if(!this.props.product) {
+            return <div>Loading...</div>
+        }
+        let product = this.props.product;
         return(
             <>
-               {this.getData()} 
+               <div className={styles.productContainer}>
+                   <div className={styles.productSlider}>
+                        {product.gallery.map(image => 
+                            <div className={styles.sliderItem} id={Date.now()}>
+                                <img src={image} alt="product" onClick={()=>{this.props.setImage(image)}}/>
+                            </div>
+                            )
+                        }
+                   </div>
+                   <div className={styles.productImage}>
+                        <img src={this.props.selectedImage ? this.props.selectedImage : product.gallery[0]} alt="product"/>
+                   </div>
+                   <div className={styles.productInfo}>
+
+                   </div>
+               </div>
             </>
         )
     }
 }
-export default  compose(
-    graphql(Data),
-    /*graphql(Data2, {name: "data2"})*/
+let mapStateToProps = (state) => {
+    return {
+        product: state.productDescriptionReducer.product,
+        selectedImage: state.productDescriptionReducer.selectedImage,
+    }
+}
+export default  connect(
+    mapStateToProps, {setImage}  
 )(ProductDescriptionPage);

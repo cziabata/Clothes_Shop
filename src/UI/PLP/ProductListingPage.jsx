@@ -3,7 +3,9 @@ import { Route } from "react-router-dom";
 import All from "./Sections/All";
 import { Tech } from "./Sections/Tech";
 import { Clothes } from "./Sections/Clothes";
-import styles from "./ProductListingPage.module.scss"
+import ProductDescriptionPage from "../PDP/ProductDescriptionPage";
+import styles from "./ProductListingPage.module.scss";
+
 export class ProductListingPage extends React.Component {
     render() {
         return(
@@ -12,6 +14,7 @@ export class ProductListingPage extends React.Component {
                     <Route path="/all" component={All}/>
                     <Route path="/tech" component={Tech}/>
                     <Route path="/clothes" component={Clothes}/>
+                    <Route path="/product_description" component={ProductDescriptionPage}/>
                 </div>
             </div>
         )

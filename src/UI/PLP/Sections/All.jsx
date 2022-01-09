@@ -3,7 +3,8 @@ import { graphql } from '@apollo/client/react/hoc';
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { AllData } from "../../../Data_Access_Layer/Data_Access_Layer";
-import { setProduct } from "../../../Redux/productDescriptionReducer";
+import { setProduct, clearImage } from "../../../Redux/productDescriptionReducer";
+import { NavLink } from "react-router-dom";
 import EmptyCart from "../../Images/Empty Cart.svg";
 import styles from "../ProductListingPage.module.scss";
 
@@ -18,7 +19,10 @@ class All extends React.Component {
                 <h1>ALL</h1>
                 <div className={styles.productsContainer}>
                     {data.category.products.map(product =>
-                        <div className={styles.productWrapper} id={product.id} onClick={()=>{this.props.setProduct(product)}}>
+                        <div className={styles.productWrapper} id={product.id} onClick={()=>{
+                            this.props.clearImage()
+                            this.props.setProduct(product)}}>
+                            <NavLink to="product_description">
                             <div className={styles.productImage}>
                                 <div>
                                     <img src={product.gallery[0]} alt="product_item"/>
@@ -34,7 +38,10 @@ class All extends React.Component {
                                     } else{return ""}}
                                 )}</span>
                             </div>
-                            <div className={styles.productCartWrap}><img src={EmptyCart} alt="cart_item" className={styles.productCart}/></div>
+                            </NavLink>
+                            <div className={styles.productCartWrap}>
+                                <img src={EmptyCart} alt="cart_item" className={styles.productCart}/>
+                            </div>
                         </div>
                     )}
                 </div>
@@ -58,4 +65,4 @@ const mapStateToProps = (state) => {
         currencyName: state.currencyReducer.name,
     }
 }
-export default compose(graphql(AllData), connect(mapStateToProps, {setProduct}))(All)
+export default compose(graphql(AllData), connect(mapStateToProps, {setProduct, clearImage}))(All)

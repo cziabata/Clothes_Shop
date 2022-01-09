@@ -25,6 +25,10 @@
         cursor: pointer;
     }
 }
+.productWrapper a {
+    color: black;
+    text-decoration: none;
+}
 .productWrapper:hover .productCartWrap {
     opacity: 1;
     pointer-events: all;
