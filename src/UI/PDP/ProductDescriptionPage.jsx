@@ -24,7 +24,27 @@ class ProductDescriptionPage extends React.Component {
                         <img src={this.props.selectedImage ? this.props.selectedImage : product.gallery[0]} alt="product"/>
                    </div>
                    <div className={styles.productInfo}>
-
+                        <h2>{product.name}</h2>
+                        <h3>{product.brand}</h3>
+                        <div>
+                            {product.attributes.length > 0 
+                                ? product.attributes.map(attribute => <div id={attribute.name}>
+                                    <div>{attribute.name}</div>
+                                    <div>{attribute.items.map(item => <div id={item.id}>{item.displayValue}</div>)}</div>
+                                    </div>)
+                                : null
+                            }
+                        </div>
+                        <div>
+                            <div>Price:</div>
+                            <div>{product.prices.map(price => {if(price.currency===this.props.currencyName){
+                                        return <span id={price.currency}>{this.props.currentCurrency + price.amount}</span>
+                                    } else{return ""}})}</div>
+                        </div>
+                        <div>
+                            <button>ADD TO CART</button>
+                        </div>
+                        <div dangerouslySetInnerHTML={{__html:product.description}} />
                    </div>
                </div>
             </>
@@ -35,6 +55,8 @@ let mapStateToProps = (state) => {
     return {
         product: state.productDescriptionReducer.product,
         selectedImage: state.productDescriptionReducer.selectedImage,
+        currentCurrency: state.currencyReducer.currentCurrency,
+        currencyName: state.currencyReducer.name,
     }
 }
 export default  connect(
