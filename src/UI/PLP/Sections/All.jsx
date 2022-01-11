@@ -45,9 +45,6 @@ class All extends React.Component {
                         </div>
                     )}
                 </div>
-                <div>
-                    <span dangerouslySetInnerHTML={{__html:data.category.products[1].description}} />
-                </div>
             </div>)
         }
     }
