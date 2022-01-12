@@ -13,7 +13,7 @@ class ProductDescriptionPage extends React.Component {
         return(
             <>
                <div className={styles.productContainer}>
-                   <div className={styles.productSlider}>
+                   <div>
                         {product.gallery.map(image => 
                             <div className={styles.sliderItem} id={Date.now()}>
                                 <img src={image} alt="product" onClick={()=>{this.props.setImage(image)}}/>
@@ -53,7 +53,7 @@ class ProductDescriptionPage extends React.Component {
                                     } else{return ""}})}</div>
                         </div>
                         <div>
-                            <button>ADD TO CART</button>
+                            <button className={styles.button}>ADD TO CART</button>
                         </div>
                         <div dangerouslySetInnerHTML={{__html:product.description}} />
                    </div>

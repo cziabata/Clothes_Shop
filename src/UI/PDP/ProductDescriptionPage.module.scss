@@ -1,8 +1,7 @@
+@import "../SCSS/Variables.scss";
+
 .productContainer {
     display: flex;
-}
-.productSlider {
-
 }
 .sliderItem {
     margin-bottom: 33px;
@@ -68,4 +67,16 @@
 .productBrand {
     font-weight: 400;
     font-size: 30px;
+}
+.button {
+    padding: 19px 93px;
+    margin: 20px 0px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: $primary_color;
+    color: white;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    
 }
