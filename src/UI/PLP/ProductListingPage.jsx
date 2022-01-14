@@ -1,8 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import All from "./Sections/All";
-import { Tech } from "./Sections/Tech";
-import { Clothes } from "./Sections/Clothes";
+import Tech from "./Sections/Tech";
+import Clothes from "./Sections/Clothes";
 import ProductDescriptionPage from "../PDP/ProductDescriptionPage";
 import styles from "./ProductListingPage.module.scss";
 
