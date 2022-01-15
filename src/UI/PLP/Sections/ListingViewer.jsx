@@ -4,6 +4,7 @@ import { setProduct, clearImage } from "../../../Redux/productDescriptionReducer
 import { connect } from "react-redux";
 import EmptyCart from "../../Images/Empty Cart.svg";
 import styles from "../ProductListingPage.module.scss";
+import cn from "classnames";
 
 class ListingViewer extends React.Component {
     render() {
@@ -16,24 +17,26 @@ class ListingViewer extends React.Component {
                         <div className={styles.productWrapper} id={product.id} onClick={()=>{
                             this.props.clearImage()
                             this.props.setProduct(product)}}>
-                            <NavLink to="product_description">
-                            <div className={styles.productImage}>
-                                <div>
-                                    <img src={product.gallery[0]} alt="product_item"/>
+                            <NavLink to="product_description" onClick={(e)=>{!product.inStock && e.preventDefault()}}>
+                                <div className={cn(styles.productFlexWrapper,{[styles.outOfStockStyles]: !product.inStock})}> 
+                                    <div className={styles.productImage}>
+                                        <img src={product.gallery[0]} alt="product_item" />
+                                        {!product.inStock && <span className={styles.outOfStockSpan}>OUT OF STOCK</span>}
+                                        <div className={cn({[styles.outOfStockBlur]: !product.inStock})}></div>
+                                    </div>
+                                    <div>
+                                        <span className={styles.productName}>{product.name}</span>
+                                    </div>
+                                    <div>
+                                        <span className={styles.productPrice}>{product.prices.map(
+                                            price=>{if(price.currency===this.props.currencyName){
+                                                return <span id={price.currency}>{this.props.currentCurrency + price.amount}</span>
+                                            } else{return ""}})}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <span className={styles.productName}>{product.name}</span>
-                            </div>
-                            <div>
-                                <span className={styles.productPrice}>{product.prices.map(
-                                    price=>{if(price.currency===this.props.currencyName){
-                                        return <span id={price.currency}>{this.props.currentCurrency + price.amount}</span>
-                                    } else{return ""}}
-                                )}</span>
-                            </div>
                             </NavLink>
-                            <div className={styles.productCartWrap}>
+                            <div className={cn(styles.productCartWrap, {[styles.displayNone]: !product.inStock})}>
                                 <img src={EmptyCart} alt="cart_item" className={styles.productCart}/>
                             </div>
                         </div>
