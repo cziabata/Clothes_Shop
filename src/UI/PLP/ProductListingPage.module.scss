@@ -1,25 +1,5 @@
 @import "../SCSS/Variables.scss";
 
-.productImage {
-    display: flex;
-    justify-content: center;
-}
-.productImage img {
-    max-width: 356px;
-    max-height: 338px;
-    display: inline-block;
-    position: relative;
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: black;
-        z-index: 99;
-    }
-}
 .productsContainer {
     display: flex;
     flex-wrap: wrap;
@@ -49,12 +29,38 @@
 .productFlexWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    height: 100%;
+}
+.productImage {
+    display: flex;
+    justify-content: center;
+}
+.productImage img {
+    max-width: 356px;
+    max-height: 338px;
+    display: inline-block;
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: black;
+        z-index: 99;
+    }
+}
+.heightEquilizer {
+    flex: 1 0 auto;
 }
 .productName {
     font-weight: 300;
     font-size: 18px;
     line-height: 28px;
+}
+.productPriceWrap {
+    flex: 0 0 auto;
 }
 .productPrice {
     font-weight: 500;

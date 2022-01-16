@@ -44,7 +44,11 @@ class Header extends React.Component {
                     </div>
                     <div className={styles.cartWrapper} onClick={this.props.activateCart}>
                         <img src={CartLogo} alt="Cart Logo"/>
-                        <span className={styles.cartBadge}>1</span>
+                        <div className={cn({[styles.cartBadge]: this.props.cartItems.length > 0})}>
+                            <span className={styles.cartBadgeContent}>
+                                { this.props.cartItems.length > 0 && this.props.cartItems.length}
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <Currency />
@@ -65,6 +69,7 @@ let mapStateToProps = (state) => {
     return {
         currentCurrency: state.currencyReducer.currentCurrency,
         isActiveCurrency: state.currencyReducer.isActiveCurrency,
+        cartItems: state.cartReducer.cartItems
     }
 }
 export default compose (graphql(GetCategories), connect(mapStateToProps, {activateCart, activateCurrency}))(Header);

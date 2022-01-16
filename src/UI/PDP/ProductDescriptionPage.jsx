@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setImage } from "../../Redux/productDescriptionReducer";
+import { addInCart } from "../../Redux/cartReducer";
 import cn from "classnames";
 import styles from "./ProductDescriptionPage.module.scss";
 
@@ -53,7 +54,10 @@ class ProductDescriptionPage extends React.Component {
                                     } else{return ""}})}</div>
                         </div>
                         <div>
-                            <button className={styles.button}>ADD TO CART</button>
+                            <button onClick={()=>{this.props.addInCart(product)}} 
+                                    className={cn(styles.button, styles.swatchHover)}>
+                                        ADD TO CART
+                            </button>
                         </div>
                         <div dangerouslySetInnerHTML={{__html:product.description}} />
                    </div>
@@ -71,5 +75,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default  connect(
-    mapStateToProps, {setImage}  
+    mapStateToProps, {setImage, addInCart}  
 )(ProductDescriptionPage);

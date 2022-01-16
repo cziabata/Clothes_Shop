@@ -24,10 +24,11 @@ class ListingViewer extends React.Component {
                                         {!product.inStock && <span className={styles.outOfStockSpan}>OUT OF STOCK</span>}
                                         <div className={cn({[styles.outOfStockBlur]: !product.inStock})}></div>
                                     </div>
-                                    <div>
+                                    <div className={styles.heightEquilizer}></div>
+                                    <div >
                                         <span className={styles.productName}>{product.name}</span>
                                     </div>
-                                    <div>
+                                    <div className={styles.productPriceWrap}>
                                         <span className={styles.productPrice}>{product.prices.map(
                                             price=>{if(price.currency===this.props.currencyName){
                                                 return <span id={price.currency}>{this.props.currentCurrency + price.amount}</span>

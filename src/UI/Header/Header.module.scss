@@ -67,6 +67,7 @@
 }
 .cartBadge {
     position: absolute;
+    display: flex;
     top: -10px;
     right: -10px;
     width: 20px;
@@ -74,8 +75,14 @@
     color: white;
     background: black;
     border-radius: 50%;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
     font-weight: 700;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+}
+.cartBadgeContent {
+    display: inline-block;
 }
 
 //use mixin (with the same styles) for overlay on cart component and currency component
