@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { setProduct, clearImage } from "../../../Redux/productDescriptionReducer";
+import { addInCart } from "../../../Redux/cartReducer";
 import { connect } from "react-redux";
 import EmptyCart from "../../Images/Empty Cart.svg";
 import styles from "../ProductListingPage.module.scss";
@@ -37,7 +38,8 @@ class ListingViewer extends React.Component {
                                     </div>
                                 </div>
                             </NavLink>
-                            <div className={cn(styles.productCartWrap, {[styles.displayNone]: !product.inStock})}>
+                            <div className={cn(styles.productCartWrap, {[styles.displayNone]: !product.inStock})}
+                                 onClick={()=>{this.props.addInCart(product)}}>
                                 <img src={EmptyCart} alt="cart_item" className={styles.productCart}/>
                             </div>
                         </div>
@@ -54,4 +56,4 @@ const mapStateToProps = (state) => {
         currencyName: state.currencyReducer.name,
     }
 }
-export default connect(mapStateToProps, {setProduct, clearImage})(ListingViewer)
+export default connect(mapStateToProps, {setProduct, clearImage, addInCart})(ListingViewer)
