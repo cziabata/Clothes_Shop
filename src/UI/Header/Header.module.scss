@@ -97,8 +97,10 @@
 .modalContent {
     width: 325px;
     height: 540px;
+    padding: 6px 10px 0px 10px;
     background: white;
     margin-right: 8vw;
+    overflow: scroll;
 }
 .currencyContent {
     width: 114px;
@@ -119,4 +121,33 @@
             transition: .2s;
         }
     }
+}
+// Cart inner styles
+.cartContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.cartFlexContainer {
+    width: 139px;
+    display: flex;
+    justify-content: space-between;
+}
+.cartItemPhoto img {
+    max-width: 105px;
+    max-height: 137px;
+}
+.cartCounter {
+    width: 24px;
+    height: 24px;
+}
+.cartBtns {
+    text-align: center;
+}
+.attrWrapper {
+    display: flex;
+}
+.colorAttr {
+    width: 24px;
+    height: 24px;
 }
