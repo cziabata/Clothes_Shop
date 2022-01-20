@@ -150,4 +150,38 @@
 .colorAttr {
     width: 24px;
     height: 24px;
+    margin-right: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.itemAttr {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        background: black;
+        color: white;
+        transition: .3s;
+    }
+}
+.cartItemName {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 25.6px;
+}
+.attrName {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 25.6px;
+}
+.cartItemPrice {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 25.6px;
 }

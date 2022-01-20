@@ -5,6 +5,11 @@ import { deactivateCart } from "../../Redux/cartReducer";
 import { connect } from "react-redux";
 
 class ModalCart extends React.Component {
+    state = {productSum: []}
+    getProductsSum = () => {
+        const reducer = (previousValue, currentValue) => previousValue + currentValue;
+        this.state.productSum.reduce(reducer)
+    }
     render() {
         return(
             
@@ -15,24 +20,27 @@ class ModalCart extends React.Component {
                     {this.props.cartItems.length>0 
                         ? this.props.cartItems.map(item=><div className={styles.cartContainer} id={item.id}>
                             <div>
-                                <div>{item.name}</div>
+                                <div className={styles.cartItemName}>{item.name}</div>
                                 <div>{item.prices.map(
                                     price=>{if(price.currency===this.props.currencyName){
-                                        return <span id={price.currency}>{this.props.currentCurrency + price.amount}</span>
+                                        return <span id={price.currency} className={styles.cartItemPrice}>
+                                                    {this.props.currentCurrency + price.amount}
+                                                    {this.state.productSum.push(price.amount)}
+                                               </span>
                                     } else {return ""}})}
                                 </div>
                                 <div>
                                     {
                                         item.attributes.length > 0 
                                         ? item.attributes.map(attribute =><div id={attribute.id}>
-                                            <div>{attribute.name}:</div>
+                                            <div className={styles.attrName}>{attribute.name}:</div>
                                             <div className={styles.attrWrapper}>
                                                 {
                                                     attribute.type === "swatch"
                                                     ? attribute.items.map(item=><div id={item.id} 
                                                                                      style={{background:item.value}}
                                                                                      className={styles.colorAttr}/>)
-                                                    : attribute.items.map(item=><div id={item.id}>{item.value}</div>)
+                                                    : attribute.items.map(item=><div id={item.id} className={styles.itemAttr}><div>{item.value}</div></div>)
                                                 }
                                             </div>
                                         </div>)
@@ -50,7 +58,10 @@ class ModalCart extends React.Component {
                                     <img src={item.gallery[0]} alt="Product in cart"/>
                                 </div>
                             </div>
+                            
                         </div>)
+                        
+                        
                         : "CART IS EMPTY"
                     }
                 </div>
