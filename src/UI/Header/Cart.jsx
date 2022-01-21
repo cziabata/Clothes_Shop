@@ -1,18 +1,13 @@
 import React from "react";
 import cn from "classnames";
 import styles from "./Header.module.scss";
-import { deactivateCart } from "../../Redux/cartReducer";
+import { deactivateCart, addToSum } from "../../Redux/cartReducer";
 import { connect } from "react-redux";
 
 class ModalCart extends React.Component {
-    state = {productSum: []}
-    getProductsSum = () => {
-        const reducer = (previousValue, currentValue) => previousValue + currentValue;
-        this.state.productSum.reduce(reducer)
-    }
+    getSum = (previousValue, currentValue) => previousValue + currentValue;
     render() {
         return(
-            
             <div className={cn(styles.modal, {[styles.active]: this.props.isActiveCart})} 
                  onClick={this.props.deactivateCart}>
                 <div className={styles.modalContent} onClick={e=>e.stopPropagation()}>
@@ -25,7 +20,6 @@ class ModalCart extends React.Component {
                                     price=>{if(price.currency===this.props.currencyName){
                                         return <span id={price.currency} className={styles.cartItemPrice}>
                                                     {this.props.currentCurrency + price.amount}
-                                                    {this.state.productSum.push(price.amount)}
                                                </span>
                                     } else {return ""}})}
                                 </div>
@@ -58,12 +52,16 @@ class ModalCart extends React.Component {
                                     <img src={item.gallery[0]} alt="Product in cart"/>
                                 </div>
                             </div>
-                            
                         </div>)
-                        
-                        
                         : "CART IS EMPTY"
                     }
+                   <div>{this.props.cartItems.length>0 && <div>
+                        <div>Total:</div>
+                        <div>{
+                           this.props.cartSum.reduce(this.getSum)
+                        }</div>
+                       </div>}
+                    </div>
                 </div>
             </div>
         )
@@ -75,6 +73,7 @@ const mapStateToProps = (state) => {
         cartItems: state.cartReducer.cartItems,
         currentCurrency: state.currencyReducer.currentCurrency,
         currencyName: state.currencyReducer.name,
+        cartSum: state.cartReducer.cartSum,
     }
 }
-export const Cart = connect(mapStateToProps, {deactivateCart})(ModalCart)
+export const Cart = connect(mapStateToProps, {deactivateCart, addToSum})(ModalCart)
