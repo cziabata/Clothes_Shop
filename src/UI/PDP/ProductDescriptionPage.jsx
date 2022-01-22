@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setImage } from "../../Redux/productDescriptionReducer";
-import { addInCart } from "../../Redux/cartReducer";
+import { addInCart, addToSum } from "../../Redux/cartReducer";
 import cn from "classnames";
 import styles from "./ProductDescriptionPage.module.scss";
 
@@ -54,7 +54,12 @@ class ProductDescriptionPage extends React.Component {
                                     } else{return ""}})}</div>
                         </div>
                         <div>
-                            <button onClick={()=>{this.props.addInCart(product)}} 
+                            <button onClick={()=>{
+                                this.props.addInCart(product)
+                                this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                    return  price.amount
+                                } else{return 0}}))
+                            }} 
                                     className={cn(styles.button, styles.swatchHover)}>
                                         ADD TO CART
                             </button>
@@ -75,5 +80,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default  connect(
-    mapStateToProps, {setImage, addInCart}  
+    mapStateToProps, {setImage, addInCart, addToSum}  
 )(ProductDescriptionPage);

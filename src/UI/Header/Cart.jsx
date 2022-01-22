@@ -55,10 +55,11 @@ class ModalCart extends React.Component {
                         </div>)
                         : "CART IS EMPTY"
                     }
-                   <div>{this.props.cartItems.length>0 && <div>
-                        <div>Total:</div>
-                        <div>{
-                           this.props.cartSum.reduce(this.getSum)
+                   <div>{this.props.cartItems.length>0 && <div className={styles.totalPriceBlock}>
+                        <div className={styles.total}>Total:</div>
+                        <div className={styles.totalPrice}>{
+                           this.props.currentCurrency +
+                           this.props.cartSum.reduce(this.getSum).toFixed(2)
                         }</div>
                        </div>}
                     </div>

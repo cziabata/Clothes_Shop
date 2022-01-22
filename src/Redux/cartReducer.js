@@ -6,7 +6,7 @@ const ADD_SUM_ITEM = "cartReducer/ADD_SUM_ITEM";
 let initialState = {
     isActiveCart: false,
     cartItems: [],
-    cartSum: [1, 2, 3]
+    cartSum: []
 }
 export let cartReducer = (state=initialState, action) => {
     switch(action.type) {
@@ -28,7 +28,7 @@ export let cartReducer = (state=initialState, action) => {
             case ADD_SUM_ITEM:
                 return {
                     ...state,
-                    cartSum: [...state.cartSum, action.item]
+                    cartSum: [...state.cartSum, ...action.price]
                 }
         default:
             return state

@@ -1,13 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { setProduct, clearImage } from "../../../Redux/productDescriptionReducer";
-import { addInCart } from "../../../Redux/cartReducer";
+import { addInCart, addToSum } from "../../../Redux/cartReducer";
 import { connect } from "react-redux";
 import EmptyCart from "../../Images/Empty Cart.svg";
 import styles from "../ProductListingPage.module.scss";
 import cn from "classnames";
 
 class ListingViewer extends React.Component {
+    state = {
+        currentPrice: null
+    }
     render() {
         return(
             <>
@@ -39,7 +42,12 @@ class ListingViewer extends React.Component {
                                 </div>
                             </NavLink>
                             <div className={cn(styles.productCartWrap, {[styles.displayNone]: !product.inStock})}
-                                 onClick={()=>{this.props.addInCart(product)}}>
+                                 onClick={()=>{
+                                     this.props.addInCart(product)
+                                     this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                        return  price.amount
+                                    } else{return 0}}))
+                                 }}>
                                 <img src={EmptyCart} alt="cart_item" className={styles.productCart}/>
                             </div>
                         </div>
@@ -56,4 +64,4 @@ const mapStateToProps = (state) => {
         currencyName: state.currencyReducer.name,
     }
 }
-export default connect(mapStateToProps, {setProduct, clearImage, addInCart})(ListingViewer)
+export default connect(mapStateToProps, {setProduct, clearImage, addInCart, addToSum})(ListingViewer)

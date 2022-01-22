@@ -185,3 +185,17 @@
     font-size: 16px;
     line-height: 25.6px;
 }
+.totalPriceBlock {
+    display: flex;
+    justify-content: space-between;
+}
+.total {
+    font-size: 16px;
+    font-weight: 500;
+    
+}
+.totalPrice {
+    font-size: 16px;
+    font-weight: 700;
+    
+}
