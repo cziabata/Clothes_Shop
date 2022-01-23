@@ -197,5 +197,34 @@
 .totalPrice {
     font-size: 16px;
     font-weight: 700;
-    
+}
+.cartBtnsWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+}
+.viewBagBtn {
+    width: 140px;
+    height: 43px;
+    border: 1px solid black;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+    &:hover {
+        color: $primary_color;
+    }
+}
+.checkOutBtn {
+    width: 140px;
+    height: 43px;
+    border: none;
+    background: $primary_color;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+    &:hover {
+        color: black;
+    }
 }

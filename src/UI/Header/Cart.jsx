@@ -3,6 +3,7 @@ import cn from "classnames";
 import styles from "./Header.module.scss";
 import { deactivateCart, addToSum } from "../../Redux/cartReducer";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 class ModalCart extends React.Component {
     getSum = (previousValue, currentValue) => previousValue + currentValue;
@@ -44,7 +45,14 @@ class ModalCart extends React.Component {
                             </div>
                             <div className={styles.cartFlexContainer}>
                                 <div className={styles.cartBtns}>
-                                    <button className={styles.cartCounter}>+</button>
+                                    <button className={styles.cartCounter}
+                                            onClick={()=>{
+                                                this.props.addToSum(item.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                                    return  price.amount
+                                                } else{return 0}}))
+                                            }}>
+                                        +
+                                    </button>
                                     <div>1</div>
                                     <button className={styles.cartCounter}>-</button>
                                 </div>
@@ -62,6 +70,18 @@ class ModalCart extends React.Component {
                            this.props.cartSum.reduce(this.getSum).toFixed(2)
                         }</div>
                        </div>}
+                       <div className={styles.cartBtnsWrap}>
+                           <div>
+                                <NavLink to="bag">
+                                    <button className={styles.viewBagBtn}>
+                                        VIEW BAG
+                                    </button>
+                               </NavLink>
+                           </div>
+                           <div>
+                               <button className={styles.checkOutBtn}>CHEK OUT</button>
+                           </div>
+                       </div>
                     </div>
                 </div>
             </div>

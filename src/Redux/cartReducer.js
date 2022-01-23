@@ -25,11 +25,11 @@ export let cartReducer = (state=initialState, action) => {
                 ...state,
                 cartItems: [...state.cartItems, action.item]
             }
-            case ADD_SUM_ITEM:
-                return {
-                    ...state,
-                    cartSum: [...state.cartSum, ...action.price]
-                }
+        case ADD_SUM_ITEM:
+            return {
+                ...state,
+                cartSum: [...state.cartSum, ...action.price]
+            }
         default:
             return state
     }
