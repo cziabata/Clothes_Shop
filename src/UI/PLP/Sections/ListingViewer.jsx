@@ -43,7 +43,10 @@ class ListingViewer extends React.Component {
                             </NavLink>
                             <div className={cn(styles.productCartWrap, {[styles.displayNone]: !product.inStock})}
                                  onClick={()=>{
-                                     this.props.addInCart(product)
+                                     this.props.addInCart(Object.create({}, {
+                                         productProperties: {value: product},
+                                         productAmount: {value:1}
+                                     }))
                                      this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
                                         return  price.amount
                                     } else{return 0}}))

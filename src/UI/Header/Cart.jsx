@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "classnames";
 import styles from "./Header.module.scss";
-import { deactivateCart, addToSum } from "../../Redux/cartReducer";
+import { deactivateCart, addToSum, increaseItem } from "../../Redux/cartReducer";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
@@ -14,10 +14,10 @@ class ModalCart extends React.Component {
                 <div className={styles.modalContent} onClick={e=>e.stopPropagation()}>
                     <h4>{`My Bag, ${this.props.cartItems.length} items`}</h4>
                     {this.props.cartItems.length>0 
-                        ? this.props.cartItems.map(item=><div className={styles.cartContainer} id={item.id}>
+                        ? this.props.cartItems.map(item=><div className={styles.cartContainer} id={item.productProperties.id}>
                             <div>
-                                <div className={styles.cartItemName}>{item.name}</div>
-                                <div>{item.prices.map(
+                                <div className={styles.cartItemName}>{item.productProperties.name}</div>
+                                <div>{item.productProperties.prices.map(
                                     price=>{if(price.currency===this.props.currencyName){
                                         return <span id={price.currency} className={styles.cartItemPrice}>
                                                     {this.props.currentCurrency + price.amount}
@@ -26,8 +26,8 @@ class ModalCart extends React.Component {
                                 </div>
                                 <div>
                                     {
-                                        item.attributes.length > 0 
-                                        ? item.attributes.map(attribute =><div id={attribute.id}>
+                                        item.productProperties.attributes.length > 0 
+                                        ? item.productProperties.attributes.map(attribute =><div id={attribute.id}>
                                             <div className={styles.attrName}>{attribute.name}:</div>
                                             <div className={styles.attrWrapper}>
                                                 {
@@ -47,17 +47,20 @@ class ModalCart extends React.Component {
                                 <div className={styles.cartBtns}>
                                     <button className={styles.cartCounter}
                                             onClick={()=>{
-                                                this.props.addToSum(item.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                                debugger
+                                                this.props.addToSum(item.productProperties.prices.map(price=>{if(price.currency===this.props.currencyName){
                                                     return  price.amount
                                                 } else{return 0}}))
+                                                this.props.increaseItem(item.productProperties.id)
+                                                debugger
                                             }}>
                                         +
                                     </button>
-                                    <div>1</div>
+                                    <div>{item.productAmount}</div>
                                     <button className={styles.cartCounter}>-</button>
                                 </div>
                                 <div className={styles.cartItemPhoto}>
-                                    <img src={item.gallery[0]} alt="Product in cart"/>
+                                    <img src={item.productProperties.gallery[0]} alt="Product in cart"/>
                                 </div>
                             </div>
                         </div>)
@@ -97,4 +100,4 @@ const mapStateToProps = (state) => {
         cartSum: state.cartReducer.cartSum,
     }
 }
-export const Cart = connect(mapStateToProps, {deactivateCart, addToSum})(ModalCart)
+export const Cart = connect(mapStateToProps, {deactivateCart, addToSum, increaseItem})(ModalCart)
