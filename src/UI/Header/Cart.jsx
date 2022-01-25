@@ -1,18 +1,20 @@
 import React from "react";
 import cn from "classnames";
 import styles from "./Header.module.scss";
-import { deactivateCart, addToSum, increaseItem } from "../../Redux/cartReducer";
+import { deactivateCart, addToSum, increaseItem, decreaseItem } from "../../Redux/cartReducer";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 class ModalCart extends React.Component {
     getSum = (previousValue, currentValue) => previousValue + currentValue;
     render() {
+        console.log(this.props.cartItems)
         return(
             <div className={cn(styles.modal, {[styles.active]: this.props.isActiveCart})} 
                  onClick={this.props.deactivateCart}>
                 <div className={styles.modalContent} onClick={e=>e.stopPropagation()}>
                     <h4>{`My Bag, ${this.props.cartItems.length} items`}</h4>
+                
                     {this.props.cartItems.length>0 
                         ? this.props.cartItems.map(item=><div className={styles.cartContainer} id={item.productProperties.id}>
                             <div>
@@ -47,17 +49,22 @@ class ModalCart extends React.Component {
                                 <div className={styles.cartBtns}>
                                     <button className={styles.cartCounter}
                                             onClick={()=>{
-                                                debugger
+                    
                                                 this.props.addToSum(item.productProperties.prices.map(price=>{if(price.currency===this.props.currencyName){
                                                     return  price.amount
                                                 } else{return 0}}))
-                                                this.props.increaseItem(item.productProperties.id)
+                                                this.props.increaseItem(item.productProperties.id, item.productAmount+1)
                                                 debugger
                                             }}>
                                         +
                                     </button>
                                     <div>{item.productAmount}</div>
-                                    <button className={styles.cartCounter}>-</button>
+                                    <button className={styles.cartCounter}
+                                            onClick={()=>{
+                                                this.props.decreaseItem(item.productProperties.id, item.productAmount-1)
+                                            }}>
+                                        -
+                                    </button>
                                 </div>
                                 <div className={styles.cartItemPhoto}>
                                     <img src={item.productProperties.gallery[0]} alt="Product in cart"/>
@@ -100,4 +107,4 @@ const mapStateToProps = (state) => {
         cartSum: state.cartReducer.cartSum,
     }
 }
-export const Cart = connect(mapStateToProps, {deactivateCart, addToSum, increaseItem})(ModalCart)
+export const Cart = connect(mapStateToProps, {deactivateCart, addToSum, increaseItem, decreaseItem})(ModalCart)

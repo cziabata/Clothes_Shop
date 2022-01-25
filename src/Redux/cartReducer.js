@@ -3,6 +3,7 @@ const DEACTIVATE_CART = "cartReducer/DEACTIVATE_CART";
 const ADD_NEW_ITEM = "cartReducer/ADD_NEW_ITEM";
 const ADD_SUM_ITEM = "cartReducer/ADD_SUM_ITEM";
 const INCREASE_ITEM_AMOUNT = "cartReducer/INCREASE_ITEM_AMOUNT";
+const DECREASE_ITEM_AMOUNT = "cartReducer/DECREASE_ITEM_AMOUNT";
 
 let initialState = {
     isActiveCart: false,
@@ -34,10 +35,16 @@ export let cartReducer = (state=initialState, action) => {
         case INCREASE_ITEM_AMOUNT:
             return {
                 ...state,
-                cartItems: state.cartItems.map(item=>item.productProperties.id === action.id
-                                                        ? item.productAmount+1
-                                                        : item
-                )
+                cartItems: [...state.cartItems.map(item=>{if(item.productProperties.id === action.id) {
+                    return {...item, productProperties: item.productProperties, productAmount: action.amount}
+                } return item })]
+            }
+        case DECREASE_ITEM_AMOUNT:
+            return {
+                ...state,
+                cartItems: [...state.cartItems.map(item=>{if(item.productProperties.id === action.id && item.productAmount !== 1){
+                    return {...item, productProperties: item.productProperties, productAmount: action.amount}
+                } return item })]
             }
         default:
             return state
@@ -48,4 +55,5 @@ export const activateCart = () => ({type:ACTIVATE_CART});
 export const deactivateCart = () => ({type:DEACTIVATE_CART});
 export const addInCart = (item) => ({type: ADD_NEW_ITEM, item});
 export const addToSum = (price) => ({type: ADD_SUM_ITEM, price});
-export const increaseItem = (id) => ({type: INCREASE_ITEM_AMOUNT, id})
+export const increaseItem = (id, amount) => ({type: INCREASE_ITEM_AMOUNT, id, amount});
+export const decreaseItem = (id, amount) => ({type: DECREASE_ITEM_AMOUNT, id, amount});
