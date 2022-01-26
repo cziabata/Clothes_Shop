@@ -1,12 +1,13 @@
 import React from "react";
 import cn from "classnames";
 import styles from "./Header.module.scss";
-import { deactivateCart, addToSum, increaseItem, decreaseItem } from "../../Redux/cartReducer";
+import { deactivateCart, addToSum, increaseItem, decreaseItem, deleteFromSum } from "../../Redux/cartReducer";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 class ModalCart extends React.Component {
     getSum = (previousValue, currentValue) => previousValue + currentValue;
+
     render() {
         console.log(this.props.cartItems)
         return(
@@ -49,7 +50,6 @@ class ModalCart extends React.Component {
                                 <div className={styles.cartBtns}>
                                     <button className={styles.cartCounter}
                                             onClick={()=>{
-                    
                                                 this.props.addToSum(item.productProperties.prices.map(price=>{if(price.currency===this.props.currencyName){
                                                     return  price.amount
                                                 } else{return 0}}))
@@ -62,6 +62,7 @@ class ModalCart extends React.Component {
                                     <button className={styles.cartCounter}
                                             onClick={()=>{
                                                 this.props.decreaseItem(item.productProperties.id, item.productAmount-1)
+                                                //this.props.deleteFromSum(item.productProperties.id)
                                             }}>
                                         -
                                     </button>
@@ -73,13 +74,13 @@ class ModalCart extends React.Component {
                         </div>)
                         : "CART IS EMPTY"
                     }
-                   <div>{this.props.cartItems.length>0 && <div className={styles.totalPriceBlock}>
+                   <div>{this.props.cartItems.length>0 && <div><div className={styles.totalPriceBlock}>
                         <div className={styles.total}>Total:</div>
                         <div className={styles.totalPrice}>{
                            this.props.currentCurrency +
                            this.props.cartSum.reduce(this.getSum).toFixed(2)
                         }</div>
-                       </div>}
+                       </div>
                        <div className={styles.cartBtnsWrap}>
                            <div>
                                 <NavLink to="bag">
@@ -92,6 +93,7 @@ class ModalCart extends React.Component {
                                <button className={styles.checkOutBtn}>CHEK OUT</button>
                            </div>
                        </div>
+                       </div>}
                     </div>
                 </div>
             </div>
@@ -107,4 +109,4 @@ const mapStateToProps = (state) => {
         cartSum: state.cartReducer.cartSum,
     }
 }
-export const Cart = connect(mapStateToProps, {deactivateCart, addToSum, increaseItem, decreaseItem})(ModalCart)
+export const Cart = connect(mapStateToProps, {deactivateCart, addToSum, increaseItem, decreaseItem, deleteFromSum})(ModalCart)

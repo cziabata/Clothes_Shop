@@ -2,6 +2,7 @@ const ACTIVATE_CART = "cartReducer/ACTIVATE_CART";
 const DEACTIVATE_CART = "cartReducer/DEACTIVATE_CART";
 const ADD_NEW_ITEM = "cartReducer/ADD_NEW_ITEM";
 const ADD_SUM_ITEM = "cartReducer/ADD_SUM_ITEM";
+const DELETE_SUM_ITEM = "cartReducer/DELETE_SUM_ITEM";
 const INCREASE_ITEM_AMOUNT = "cartReducer/INCREASE_ITEM_AMOUNT";
 const DECREASE_ITEM_AMOUNT = "cartReducer/DECREASE_ITEM_AMOUNT";
 
@@ -32,6 +33,15 @@ export let cartReducer = (state=initialState, action) => {
                 ...state,
                 cartSum: [...state.cartSum, ...action.price]
             }
+        /*case DELETE_SUM_ITEM:
+            return {
+                ...state,
+                cartSum: [state.cartSum.forEach((item, i, array)=> {
+                    if(item.id === action.id) {
+                        return array.splice(i, 1)
+                    }
+                })]
+            }*/
         case INCREASE_ITEM_AMOUNT:
             return {
                 ...state,
@@ -55,5 +65,6 @@ export const activateCart = () => ({type:ACTIVATE_CART});
 export const deactivateCart = () => ({type:DEACTIVATE_CART});
 export const addInCart = (item) => ({type: ADD_NEW_ITEM, item});
 export const addToSum = (price) => ({type: ADD_SUM_ITEM, price});
+export const deleteFromSum = (id) => ({type: DELETE_SUM_ITEM, id});
 export const increaseItem = (id, amount) => ({type: INCREASE_ITEM_AMOUNT, id, amount});
 export const decreaseItem = (id, amount) => ({type: DECREASE_ITEM_AMOUNT, id, amount});
