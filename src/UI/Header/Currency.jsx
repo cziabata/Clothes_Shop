@@ -18,7 +18,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "USD" && this.props.addToSum([item.amount])))
+                                    item => item.currency === "USD" && this.props.addToSum([item.amount*product.productAmount])))
                         }
                         }>$ USD</div>
                         <div onClick={()=>
@@ -26,7 +26,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "GBP" && this.props.addToSum([item.amount])))
+                                    item => item.currency === "GBP" && this.props.addToSum([item.amount*product.productAmount])))
                         }
                         }>£ GBP</div>
                         <div onClick={()=>
@@ -34,7 +34,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "JPY" && this.props.addToSum([item.amount])))
+                                    item => item.currency === "JPY" && this.props.addToSum([item.amount*product.productAmount])))
                         }
                         }>¥ JPY</div>
                         <div onClick={()=>
@@ -42,7 +42,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "AUD" && this.props.addToSum([item.amount])))
+                                    item => item.currency === "AUD" && this.props.addToSum([item.amount*product.productAmount])))
                         }
                         }>$ AUD</div>
                         <div onClick={()=>
@@ -50,7 +50,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "RUB" && this.props.addToSum([item.amount])))
+                                    item => item.currency === "RUB" && this.props.addToSum([item.amount*product.productAmount])))
                         }
                         }>₽ RUB</div>
                      </div>

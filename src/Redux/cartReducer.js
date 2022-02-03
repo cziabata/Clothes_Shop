@@ -29,7 +29,6 @@ export let cartReducer = (state=initialState, action) => {
                 cartItems: [...state.cartItems, action.item]
             }
         case ADD_SUM_ITEM:
-            debugger
             return {
                 ...state,
                 cartSum: [...state.cartSum, ...action.price]

@@ -1,15 +1,15 @@
 import React from "react";
 import cn from "classnames";
 import styles from "./Header.module.scss";
-import { deactivateCart, addToSum, increaseItem, decreaseItem} from "../../Redux/cartReducer";
+import { deactivateCart, addToSum, increaseItem, decreaseItem, addInCart} from "../../Redux/cartReducer";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 class ModalCart extends React.Component {
     getSum = (previousValue, currentValue) => previousValue + currentValue;
 
+
     render() {
-        console.log(this.props.cartItems)
         return(
             <div className={cn(styles.modal, {[styles.active]: this.props.isActiveCart})} 
                  onClick={this.props.deactivateCart}>
@@ -50,11 +50,11 @@ class ModalCart extends React.Component {
                                 <div className={styles.cartBtns}>
                                     <button className={styles.cartCounter}
                                             onClick={()=>{
-                                                this.props.addToSum(item.productProperties.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                                this.props.addToSum(item.productProperties.prices.map(
+                                                    price=>{if(price.currency===this.props.currencyName){
                                                     return  price.amount
                                                 } else{return 0}}))
                                                 this.props.increaseItem(item.productProperties.id, item.productAmount+1)
-                                                debugger
                                             }}>
                                         +
                                     </button>
@@ -62,6 +62,7 @@ class ModalCart extends React.Component {
                                     <button className={styles.cartCounter}
                                             onClick={()=>{
                                                 this.props.decreaseItem(item.productProperties.id, item.productAmount-1)
+                                                console.log(this.props.cartSum.find(sumItem => sumItem === item.productProperties.prices.map(price=>price)))
                                             }}>
                                         -
                                     </button>
@@ -109,4 +110,4 @@ const mapStateToProps = (state) => {
         cartSum: state.cartReducer.cartSum,
     }
 }
-export const Cart = connect(mapStateToProps, {deactivateCart, addToSum, increaseItem, decreaseItem})(ModalCart)
+export const Cart = connect(mapStateToProps, {deactivateCart, addToSum, increaseItem, decreaseItem, addInCart})(ModalCart)
