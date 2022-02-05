@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 class ModalCart extends React.Component {
     getSum = (previousValue, currentValue) => previousValue + currentValue;
     render() {
+        debugger
         return(
             <div className={cn(styles.modal, {[styles.active]: this.props.isActiveCart})} 
                  onClick={this.props.deactivateCart}>
@@ -59,12 +60,11 @@ class ModalCart extends React.Component {
                                     <div>{item.productAmount}</div>
                                     <button className={styles.cartCounter}
                                             onClick={()=>{
-                                                
                                                 let currentPrices = item.productProperties.prices.map(price=>{
                                                     if(price.currency===this.props.currencyName){
                                                         return price.amount
                                                     } else {return 0}})
-                                                this.props.removeFromSum(currentPrices.find(item=>item!==0))
+                                                this.props.removeFromSum(currentPrices.find(i=>i!==0))
                                                 this.props.decreaseItem(item.productProperties.id, item.productAmount-1)
                                             }}>
                                         -

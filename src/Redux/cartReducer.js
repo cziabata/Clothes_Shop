@@ -38,7 +38,7 @@ export let cartReducer = (state=initialState, action) => {
             debugger
             return {
                 ...state,
-                cartSum: [...state.cartSum.splice(state.cartSum.indexOf(action.value), 1)]
+                cartSum: [...state.cartSum.splice(state.cartSum.indexOf(action.index), 1)]
             }
         case CLEAR_CART_SUM:
             return {
