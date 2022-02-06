@@ -38,7 +38,7 @@ export let cartReducer = (state=initialState, action) => {
             debugger
             return {
                 ...state,
-                cartSum: [...state.cartSum.splice(state.cartSum.indexOf(action.index), 1)]
+                cartSum: [...action.index]
             }
         case CLEAR_CART_SUM:
             return {
@@ -49,14 +49,14 @@ export let cartReducer = (state=initialState, action) => {
             return {
                 ...state,
                 cartItems: [...state.cartItems.map(item=>{if(item.productProperties.id === action.id) {
-                    return {...item, productProperties: item.productProperties, productAmount: action.amount}
+                    return {...item, productProperties: item.productProperties, productAmount: item.productAmount+1}
                 } return item })]
             }
         case DECREASE_ITEM_AMOUNT:
             return {
                 ...state,
-                cartItems: [...state.cartItems.map(item=>{if(item.productProperties.id === action.id && item.productAmount !== 1){
-                    return {...item, productProperties: item.productProperties, productAmount: action.amount}
+                cartItems: [...state.cartItems.map(item=>{if(item.productProperties.id === action.id && item.productAmount !== 0){
+                    return {...item, productProperties: item.productProperties, productAmount: item.productAmount-1}
                 } return item })]
             }
         default:
@@ -70,5 +70,5 @@ export const addInCart = (item) => ({type: ADD_NEW_ITEM, item});
 export const addToSum = (price) => ({type: ADD_SUM_ITEM, price});
 export const removeFromSum = (index) => ({type: REMOVE_SUM_ITEM, index});
 export const clearCartSum = () => ({type: CLEAR_CART_SUM});
-export const increaseItem = (id, amount) => ({type: INCREASE_ITEM_AMOUNT, id, amount});
-export const decreaseItem = (id, amount) => ({type: DECREASE_ITEM_AMOUNT, id, amount});
+export const increaseItem = (id) => ({type: INCREASE_ITEM_AMOUNT, id});
+export const decreaseItem = (id) => ({type: DECREASE_ITEM_AMOUNT, id});

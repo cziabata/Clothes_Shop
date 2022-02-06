@@ -8,7 +8,6 @@ import { NavLink } from "react-router-dom";
 class ModalCart extends React.Component {
     getSum = (previousValue, currentValue) => previousValue + currentValue;
     render() {
-        debugger
         return(
             <div className={cn(styles.modal, {[styles.active]: this.props.isActiveCart})} 
                  onClick={this.props.deactivateCart}>
@@ -53,7 +52,7 @@ class ModalCart extends React.Component {
                                                     price=>{if(price.currency===this.props.currencyName){
                                                     return  price.amount
                                                 } else{return 0}}))
-                                                this.props.increaseItem(item.productProperties.id, item.productAmount+1)
+                                                this.props.increaseItem(item.productProperties.id)
                                             }}>
                                         +
                                     </button>
@@ -64,8 +63,12 @@ class ModalCart extends React.Component {
                                                     if(price.currency===this.props.currencyName){
                                                         return price.amount
                                                     } else {return 0}})
-                                                this.props.removeFromSum(currentPrices.find(i=>i!==0))
-                                                this.props.decreaseItem(item.productProperties.id, item.productAmount-1)
+                                                let deletingPrice = currentPrices.find(i=>i!==0)
+                                                let indexOfdelPrice = this.props.cartSum.indexOf(deletingPrice)
+                                                let reducedCartSum = this.props.cartSum
+                                                this.props.cartSum.splice(indexOfdelPrice, 1)
+                                                this.props.removeFromSum(reducedCartSum)
+                                                this.props.decreaseItem(item.productProperties.id)
                                             }}>
                                         -
                                     </button>

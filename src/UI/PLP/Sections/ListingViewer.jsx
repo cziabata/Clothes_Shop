@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { setProduct, clearImage } from "../../../Redux/productDescriptionReducer";
-import { addInCart, addToSum } from "../../../Redux/cartReducer";
+import { addInCart, addToSum, increaseItem } from "../../../Redux/cartReducer";
 import { connect } from "react-redux";
 import EmptyCart from "../../Images/Empty Cart.svg";
 import styles from "../ProductListingPage.module.scss";
@@ -43,13 +43,37 @@ class ListingViewer extends React.Component {
                             </NavLink>
                             <div className={cn(styles.productCartWrap, {[styles.displayNone]: !product.inStock})}
                                  onClick={()=>{
-                                     this.props.addInCart(Object.create({}, {
-                                         productProperties: {value: product},
-                                         productAmount: {value:1}
-                                     }))
-                                     this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
-                                        return  price.amount
-                                    } else{return 0}}))
+                                     if(this.props.cartItems.length>0){
+                                        const exist = this.props.cartItems.find(x=> x.productProperties.id === product.id)
+                                        debugger
+                                        if(exist){
+                                            this.props.increaseItem(product.id)
+                                            this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                                return  price.amount
+                                            } else{return 0}}))
+                                        }
+                                        const checkingIdArr = this.props.cartItems.map(checkItem=>checkItem.productProperties.id)
+                                        const isExistId = checkingIdArr.find(x=> x === product.id)
+                                        if(!isExistId) {
+                                            this.props.addInCart(Object.create({}, {
+                                                productProperties: {value: product},
+                                                productAmount: {value:1}
+                                            }))
+                                            this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                                return  price.amount
+                                            } else{return 0}}))
+                                        }
+                                     }
+                                     if(this.props.cartItems.length===0){
+                                        this.props.addInCart(Object.create({}, {
+                                            productProperties: {value: product},
+                                            productAmount: {value:1}
+                                        }))
+                                        this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                            return  price.amount
+                                        } else{return 0}}))
+                                     }
+                                     
                                  }}>
                                 <img src={EmptyCart} alt="cart_item" className={styles.productCart}/>
                             </div>
@@ -65,6 +89,7 @@ const mapStateToProps = (state) => {
     return {
         currentCurrency: state.currencyReducer.currentCurrency,
         currencyName: state.currencyReducer.name,
+        cartItems: state.cartReducer.cartItems,
     }
 }
-export default connect(mapStateToProps, {setProduct, clearImage, addInCart, addToSum})(ListingViewer)
+export default connect(mapStateToProps, {setProduct, clearImage, addInCart, addToSum, increaseItem})(ListingViewer)
