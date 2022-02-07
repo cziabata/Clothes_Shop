@@ -45,7 +45,6 @@ class ListingViewer extends React.Component {
                                  onClick={()=>{
                                      if(this.props.cartItems.length>0){
                                         const exist = this.props.cartItems.find(x=> x.productProperties.id === product.id)
-                                        debugger
                                         if(exist){
                                             this.props.increaseItem(product.id)
                                             this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){

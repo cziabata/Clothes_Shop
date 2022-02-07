@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setImage } from "../../Redux/productDescriptionReducer";
-import { addInCart, addToSum } from "../../Redux/cartReducer";
+import { addInCart, addToSum, increaseItem } from "../../Redux/cartReducer";
 import cn from "classnames";
 import styles from "./ProductDescriptionPage.module.scss";
 
@@ -55,15 +55,35 @@ class ProductDescriptionPage extends React.Component {
                         </div>
                         <div>
                             <button onClick={()=>{
-                                this.props.addInCart(
-                                    Object.create({}, {
+                                if(this.props.cartItems.length>0){
+                                    const exist = this.props.cartItems.find(x=> x.productProperties.id === product.id)
+                                    if(exist){
+                                        this.props.increaseItem(product.id)
+                                        this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                            return  price.amount
+                                        } else{return 0}}))
+                                    }
+                                    const checkingIdArr = this.props.cartItems.map(checkItem=>checkItem.productProperties.id)
+                                    const isExistId = checkingIdArr.find(x=> x === product.id)
+                                    if(!isExistId) {
+                                        this.props.addInCart(Object.create({}, {
+                                            productProperties: {value: product},
+                                            productAmount: {value:1}
+                                        }))
+                                        this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                            return  price.amount
+                                        } else{return 0}}))
+                                    }
+                                 }
+                                 if(this.props.cartItems.length===0){
+                                    this.props.addInCart(Object.create({}, {
                                         productProperties: {value: product},
                                         productAmount: {value:1}
-                                    })
-                                )
-                                this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
-                                    return  price.amount
-                                } else{return 0}}))
+                                    }))
+                                    this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
+                                        return  price.amount
+                                    } else{return 0}}))
+                                 }
                             }} 
                                     className={cn(styles.button, styles.swatchHover)}>
                                         ADD TO CART
@@ -82,8 +102,9 @@ let mapStateToProps = (state) => {
         selectedImage: state.productDescriptionReducer.selectedImage,
         currentCurrency: state.currencyReducer.currentCurrency,
         currencyName: state.currencyReducer.name,
+        cartItems: state.cartReducer.cartItems,
     }
 }
 export default  connect(
-    mapStateToProps, {setImage, addInCart, addToSum}  
+    mapStateToProps, {setImage, addInCart, addToSum, increaseItem}  
 )(ProductDescriptionPage);
