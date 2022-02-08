@@ -6,6 +6,12 @@ import { deactivateCurrency, setUSD, setGBP, setJPY, setAUD, setRUB } from "../.
 import { clearCartSum, addToSum } from "../../Redux/cartReducer";
 
 class CurrencyBar extends React.Component {
+    addInCartSum=(itemSum, productAmount)=>{
+        while(productAmount){
+            this.props.addToSum([itemSum])
+            productAmount--
+        }
+    }
     render() {
         return(
             <>
@@ -18,7 +24,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "USD" && this.props.addToSum([item.amount*product.productAmount])))
+                                    item => item.currency === "USD" && this.addInCartSum(item.amount,product.productAmount)))
                         }
                         }>$ USD</div>
                         <div onClick={()=>
@@ -26,7 +32,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "GBP" && this.props.addToSum([item.amount*product.productAmount])))
+                                    item => item.currency === "GBP" && this.addInCartSum(item.amount,product.productAmount)))
                         }
                         }>£ GBP</div>
                         <div onClick={()=>
@@ -34,7 +40,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "JPY" && this.props.addToSum([item.amount*product.productAmount])))
+                                    item => item.currency === "JPY" && this.addInCartSum(item.amount,product.productAmount)))
                         }
                         }>¥ JPY</div>
                         <div onClick={()=>
@@ -42,7 +48,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "AUD" && this.props.addToSum([item.amount*product.productAmount])))
+                                    item => item.currency === "AUD" && this.addInCartSum(item.amount,product.productAmount)))
                         }
                         }>$ AUD</div>
                         <div onClick={()=>
@@ -50,7 +56,7 @@ class CurrencyBar extends React.Component {
                             this.props.clearCartSum()
                             this.props.cartItems.map(
                                 product => product.productProperties.prices.map(
-                                    item => item.currency === "RUB" && this.props.addToSum([item.amount*product.productAmount])))
+                                    item => item.currency === "RUB" && this.addInCartSum(item.amount,product.productAmount)))
                         }
                         }>₽ RUB</div>
                      </div>

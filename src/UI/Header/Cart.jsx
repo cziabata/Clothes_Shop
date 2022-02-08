@@ -59,6 +59,26 @@ class ModalCart extends React.Component {
                                     <div>{item.productAmount}</div>
                                     <button className={styles.cartCounter}
                                             onClick={()=>{
+                                                /*debugger
+                                                let currentPrices = item.productProperties.prices.map(price=>{
+                                                    if(price.currency===this.props.currencyName){
+                                                        return price.amount
+                                                    } else {return 0}})
+                                                let deletingPrice = currentPrices.find(i=>i!==0)
+                                                if(this.props.cartSum.length!==1) {
+                                                    let indexOfdelPrice = this.props.cartSum.indexOf(deletingPrice)
+                                                    if(indexOfdelPrice>=0){
+                                                        let reducedCartSum = this.props.cartSum
+                                                        this.props.cartSum.splice(indexOfdelPrice, 1)
+                                                        this.props.removeFromSum(reducedCartSum)
+                                                    }
+                                                }
+                                                debugger
+                                                if(this.props.cartSum.length===1 && this.props.cartSum.reduce(this.getSum)>0){
+                                                    this.props.removeFromSum([this.props.cartSum[0]-deletingPrice])
+                                                }
+                                                debugger
+                                                this.props.decreaseItem(item.productProperties.id)*/
                                                 let currentPrices = item.productProperties.prices.map(price=>{
                                                     if(price.currency===this.props.currencyName){
                                                         return price.amount
