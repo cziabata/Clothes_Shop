@@ -19,7 +19,7 @@ class ModalCart extends React.Component {
                                 <div className={styles.cartItemName}>{item.productProperties.name}</div>
                                 <div>{item.productProperties.prices.map(
                                     price=>{if(price.currency===this.props.currencyName){
-                                        return <span id={price.currency} className={styles.cartItemPrice}>
+                                        return <span key={price.currency} className={styles.cartItemPrice}>
                                                     {this.props.currentCurrency + price.amount}
                                                </span>
                                     } else {return ""}})}
@@ -27,16 +27,16 @@ class ModalCart extends React.Component {
                                 <div>
                                     {
                                         item.productProperties.attributes.length > 0 
-                                        ? item.productProperties.attributes.map(attribute =><div id={attribute.id}>
+                                        ? item.productProperties.attributes.map(attribute =><div key={attribute.id}>
                                             <div className={styles.attrName}>{attribute.name}:</div>
                                             <div className={styles.attrWrapper}>
                                                 {
                                                     attribute.type === "swatch"
-                                                    ? attribute.items.map(item=><div id={item.id} 
+                                                    ? attribute.items.map(item=><div key={item.id} 
                                                                                      style={{background:item.value}}
                                                                                      className={styles.colorAttr}/>)
                                                     : attribute.items.map(item=>
-                                                        <div id={item.id} className={styles.itemAttr}><div>{item.value}</div></div>)
+                                                        <div key={item.id} className={styles.itemAttr}><div>{item.value}</div></div>)
                                                 }
                                             </div>
                                         </div>)
