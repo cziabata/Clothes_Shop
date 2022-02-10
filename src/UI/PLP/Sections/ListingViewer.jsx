@@ -18,7 +18,7 @@ class ListingViewer extends React.Component {
                 <h1>{this.props.data.category.name.toUpperCase()}</h1>
                 <div className={styles.productsContainer}>
                     {this.props.data.category.products.map(product =>
-                        <div className={styles.productWrapper} id={product.id} onClick={()=>{
+                        <div className={styles.productWrapper} key={product.id} onClick={()=>{
                             this.props.clearImage()
                             this.props.setProduct(product)}}>
                             <NavLink to="product_description" onClick={(e)=>{!product.inStock && e.preventDefault()}}>
@@ -35,7 +35,7 @@ class ListingViewer extends React.Component {
                                     <div className={styles.productPriceWrap}>
                                         <span className={styles.productPrice}>{product.prices.map(
                                             price=>{if(price.currency===this.props.currencyName){
-                                                return <span id={price.currency}>{this.props.currentCurrency + price.amount}</span>
+                                                return <span key={price.currency}>{this.props.currentCurrency + price.amount}</span>
                                             } else{return ""}})}
                                         </span>
                                     </div>

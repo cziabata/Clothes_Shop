@@ -14,7 +14,7 @@ class ModalCart extends React.Component {
                 <div className={styles.modalContent} onClick={(e)=>{e.stopPropagation()}}>
                     <h4>{`My Bag, ${this.props.cartItems.length} items`}</h4>
                     {this.props.cartItems.length>0 
-                        ? this.props.cartItems.map(item=><div className={styles.cartContainer} id={item.productProperties.id}>
+                        ? this.props.cartItems.map(item=><div className={styles.cartContainer} key={item.productProperties.id}>
                             <div>
                                 <div className={styles.cartItemName}>{item.productProperties.name}</div>
                                 <div>{item.productProperties.prices.map(
@@ -96,7 +96,7 @@ class ModalCart extends React.Component {
                                     <button className={styles.viewBagBtn}>
                                         VIEW BAG
                                     </button>
-                               </NavLink>
+                                </NavLink>
                            </div>
                            <div>
                                <button className={styles.checkOutBtn}>CHEK OUT</button>

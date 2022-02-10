@@ -6,6 +6,11 @@ class Bag extends React.Component {
         return(
             <div>
                 <div><h1>Cart</h1></div>
+                <div>
+                    {this.props.cartItems.map(item=><div key={item.productProperties.id}>
+                        
+                    </div>)}
+                </div>
             </div>
         )
     }
