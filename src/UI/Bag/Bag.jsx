@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addToSum, removeFromSum, increaseItem, decreaseItem } from "../../Redux/cartReducer";
+import { BagSlider } from "../Bag/Bag_Slider";
 import common_styles from "../Header/Header.module.scss";
 import bag_styles from"./Bag.module.scss";
 
@@ -74,7 +75,7 @@ class Bag extends React.Component {
                                     </button>
                                 </div>
                                 <div className={common_styles.cartItemPhoto}>
-                                    <img src={item.productProperties.gallery[0]} alt="Product in cart"/>
+                                    <BagSlider images={item.productProperties.gallery}/>
                                 </div>
                             </div>
                         </div>

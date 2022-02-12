@@ -1,3 +1,5 @@
+@import "../SCSS/Mixins.scss";
+
 .bag_header {
     font-weight: 700;
     font-size: 32px;
@@ -9,4 +11,18 @@
 .product_price {
     font-weight: 700;
     font-size: 24px;
+}
+.slider {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.left_arrow {
+    @include slider_arrows();
+    left: 5px;
+}
+.right_arrow {
+    @include slider_arrows();
+    right: 5px;
 }
