@@ -2,7 +2,6 @@
  import Left_Arrow from "../Images/Left_Arrow.svg";
  import Right_Arrow from "../Images/Right_Arrow.svg";
  import bag_styles from"./Bag.module.scss";
- import cn from "classnames";
 
  export class BagSlider extends React.Component {
      state = {
@@ -20,10 +19,11 @@
         })
     }
      render() {
+         debugger
          return(
              <section className={bag_styles.slider}>
-                 <img src={Left_Arrow} alt="Prev Slide" className={bag_styles.left_arrow} onClick={()=>this.prevSlide()}/>
-                 <img src={Right_Arrow} alt="Next Arrow" className={bag_styles.right_arrow} onClick={()=>this.nextSlide()}/>
+                 {this.props.images.length>1 &&<><img src={Left_Arrow} alt="Prev Slide" className={bag_styles.left_arrow} onClick={()=>this.prevSlide()}/>
+                 <img src={Right_Arrow} alt="Next Arrow" className={bag_styles.right_arrow} onClick={()=>this.nextSlide()}/></>}
                 {this.props.images.map((image, index)=>
                     <div key={image}>
                         {index===this.state.current && <img src={image} alt={image}/>}

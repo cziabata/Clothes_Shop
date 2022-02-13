@@ -26,3 +26,34 @@
     @include slider_arrows();
     right: 5px;
 }
+.flexContainer{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px #E5E5E5 solid;
+    padding: 20px 0;
+}
+.bagAttr{
+    width: 63px;
+    height: 45px;
+    margin-right: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        background: black;
+        color: white;
+        transition: .3s;
+    }
+}
+.colorAttr {
+    width: 63px;
+    height: 45px;
+    margin-right: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+

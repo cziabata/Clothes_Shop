@@ -11,7 +11,7 @@ class Bag extends React.Component {
             <div>
                 <div><h1 className={bag_styles.bag_header}>Cart</h1></div>
                 <div>
-                    {this.props.cartItems.map(item=><div key={item.productProperties.id}>
+                    {this.props.cartItems.map(item=><div key={item.productProperties.id} className={bag_styles.flexContainer}>
                         <div>
                             <div className={bag_styles.product_name}>{item.productProperties.name}</div>
                             <div>{item.productProperties.prices.map(
@@ -25,15 +25,15 @@ class Bag extends React.Component {
                                     {
                                         item.productProperties.attributes.length > 0 
                                         ? item.productProperties.attributes.map(attribute =><div key={attribute.id}>
-                                            <div >{attribute.name}:</div>
+                                            <div>{attribute.name}:</div>
                                             <div className={common_styles.attrWrapper}>
                                                 {
                                                     attribute.type === "swatch"
                                                     ? attribute.items.map(item=><div key={item.id} 
                                                                                      style={{background:item.value}}
-                                                                                     className={common_styles.colorAttr}/>)
+                                                                                     className={bag_styles.colorAttr}/>)
                                                     : attribute.items.map(item=>
-                                                        <div key={item.id} className={common_styles.itemAttr}><div>{item.value}</div></div>)
+                                                        <div id="item" key={item.id} className={bag_styles.bagAttr}><div>{item.value}</div></div>)
                                                 }
                                             </div>
                                         </div>)

@@ -133,6 +133,11 @@
     display: flex;
     justify-content: space-between;
 }
+.verticalAlign{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .cartItemPhoto img {
     max-width: 105px;
     max-height: 137px;
@@ -142,6 +147,9 @@
     height: 24px;
 }
 .cartBtns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     text-align: center;
 }
 .attrWrapper {

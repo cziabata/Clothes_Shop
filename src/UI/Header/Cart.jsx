@@ -15,7 +15,7 @@ class ModalCart extends React.Component {
                     <h4>{`My Bag, ${this.props.cartItems.length} items`}</h4>
                     {this.props.cartItems.length>0 
                         ? this.props.cartItems.map(item=><div className={styles.cartContainer} key={item.productProperties.id}>
-                            <div>
+                            <div className={styles.verticalAlign}>
                                 <div className={styles.cartItemName}>{item.productProperties.name}</div>
                                 <div>{item.productProperties.prices.map(
                                     price=>{if(price.currency===this.props.currencyName){
