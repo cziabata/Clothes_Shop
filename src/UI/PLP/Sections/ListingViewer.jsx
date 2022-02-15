@@ -53,11 +53,13 @@ class ListingViewer extends React.Component {
                                         }
                                         const checkingIdArr = this.props.cartItems.map(checkItem=>checkItem.productProperties.id)
                                         const isExistId = checkingIdArr.find(x=> x === product.id)
+                                        debugger
                                         if(!isExistId) {
                                             this.props.addInCart(Object.create({}, {
                                                 productProperties: {value: product},
                                                 productAmount: {value:1}
                                             }))
+                                            debugger
                                             this.props.addToSum(product.prices.map(price=>{if(price.currency===this.props.currencyName){
                                                 return  price.amount
                                             } else{return 0}}))
