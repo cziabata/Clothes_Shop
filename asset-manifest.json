@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Clothes_Shop/static/css/main.9a8d5e04.chunk.css",
+    "main.js": "/Clothes_Shop/static/js/main.c5d26778.chunk.js",
+    "main.js.map": "/Clothes_Shop/static/js/main.c5d26778.chunk.js.map",
+    "runtime-main.js": "/Clothes_Shop/static/js/runtime-main.b7322d35.js",
+    "runtime-main.js.map": "/Clothes_Shop/static/js/runtime-main.b7322d35.js.map",
+    "static/js/2.fd3b8c03.chunk.js": "/Clothes_Shop/static/js/2.fd3b8c03.chunk.js",
+    "static/js/2.fd3b8c03.chunk.js.map": "/Clothes_Shop/static/js/2.fd3b8c03.chunk.js.map",
+    "index.html": "/Clothes_Shop/index.html",
+    "static/css/main.9a8d5e04.chunk.css.map": "/Clothes_Shop/static/css/main.9a8d5e04.chunk.css.map",
+    "static/js/2.fd3b8c03.chunk.js.LICENSE.txt": "/Clothes_Shop/static/js/2.fd3b8c03.chunk.js.LICENSE.txt",
+    "static/media/Empty Cart.e4a558c4.svg": "/Clothes_Shop/static/media/Empty Cart.e4a558c4.svg",
+    "static/media/Left_Arrow.e37a1628.svg": "/Clothes_Shop/static/media/Left_Arrow.e37a1628.svg",
+    "static/media/Right_Arrow.2037597b.svg": "/Clothes_Shop/static/media/Right_Arrow.2037597b.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b7322d35.js",
+    "static/js/2.fd3b8c03.chunk.js",
+    "static/css/main.9a8d5e04.chunk.css",
+    "static/js/main.c5d26778.chunk.js"
+  ]
+}
